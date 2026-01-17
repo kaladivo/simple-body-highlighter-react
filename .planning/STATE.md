@@ -10,20 +10,20 @@
 
 ## Current Position
 
-**Phase:** 1 of 3 (Foundation + Build System) - COMPLETE
-**Plan:** 3 of 3 complete
-**Status:** Phase 1 complete, ready for Phase 2
-**Last activity:** 2026-01-17 - Completed 01-03-PLAN.md (Build Verification)
+**Phase:** 2 of 3 (Core Migration)
+**Plan:** 1 of 4 complete
+**Status:** In progress - Plan 02-01 complete
+**Last activity:** 2026-01-17 - Completed 02-01-PLAN.md (Type System)
 
 **Progress:**
 ```
 Phase 1: [##########] 100% (3/3 plans) COMPLETE
-Phase 2: [..........] 0%
+Phase 2: [##........] 25% (1/4 plans)
 Phase 3: [..........] 0%
-Overall: [###.......] ~33% (3/9 estimated plans)
+Overall: [####......] ~44% (4/9 estimated plans)
 ```
 
-**Next Action:** Plan Phase 2 (API and Component Implementation)
+**Next Action:** Execute 02-02-PLAN.md (Asset Refactoring)
 
 ---
 
@@ -31,9 +31,9 @@ Overall: [###.......] ~33% (3/9 estimated plans)
 
 | Metric | Value |
 |--------|-------|
-| Session count | 3 |
-| Plans completed | 3 |
-| Requirements done | 8/23 |
+| Session count | 4 |
+| Plans completed | 4 |
+| Requirements done | 9/23 |
 | Phases complete | 1/3 |
 
 ---
@@ -56,6 +56,10 @@ Overall: [###.......] ~33% (3/9 estimated plans)
 | onClick over onPress | Standard web event handlers | 2026-01-17 |
 | cursor: pointer styling | Visual feedback for interactive body parts | 2026-01-17 |
 | role="img" + aria-label | Web accessibility replacing RN accessible props | 2026-01-17 |
+| 44 slugs total (38 bilateral + 4 centerline + 2 back-neck) | Based on SVG asset path structure analysis | 2026-01-17 |
+| upper-back and lower-back are bilateral | Assets have path.left/right, not centerline | 2026-01-17 |
+| chest is bilateral | Assets have path.left/right in bodyFront.ts | 2026-01-17 |
+| Both slug and color required in BodyPartData | Simplified API, no optional fields | 2026-01-17 |
 
 ### Technical Notes
 
@@ -69,6 +73,8 @@ Overall: [###.......] ~33% (3/9 estimated plans)
 - Export Body as both default and named export
 - ESM import test: `node --input-type=module -e "import { Body } from './dist/index.js'"`
 - CJS import test: `node -e "const { Body } = require('./dist/index.cjs')"`
+- BodyPartSlug: 44 slugs - 19 bilateral pairs, 4 centerline, 2 back-view-only
+- neck is dual: centerline "neck" for front view, bilateral "left-neck"/"right-neck" for back view
 
 ### Todos
 
@@ -76,7 +82,11 @@ Overall: [###.......] ~33% (3/9 estimated plans)
 - [x] Execute 01-01 (Build System Setup)
 - [x] Execute 01-02 (SVG Component Migration)
 - [x] Execute 01-03 (Build Verification)
-- [ ] Plan Phase 2
+- [x] Plan Phase 2
+- [x] Execute 02-01 (Type System)
+- [ ] Execute 02-02 (Asset Refactoring)
+- [ ] Execute 02-03 (Component Refactoring)
+- [ ] Execute 02-04 (Testing)
 
 ### Blockers
 
@@ -84,38 +94,38 @@ None
 
 ---
 
-## Phase 1 Completion Summary
+## Phase 2 Progress
 
-**Phase 1: Foundation + Build System** is now complete.
+**Phase 2: Core Migration** is in progress.
 
 | Plan | Name | Status | Key Output |
 |------|------|--------|------------|
-| 01-01 | Build System Setup | Complete | tsup, package.json, tsconfig.json |
-| 01-02 | SVG Component Migration | Complete | Native SVG components in src/ |
-| 01-03 | Build Verification | Complete | Verified ESM, CJS, types all work |
+| 02-01 | Type System | Complete | src/types.ts with BodyPartSlug, BodyPartData, ModelProps |
+| 02-02 | Asset Refactoring | Pending | Bilateral slug split in asset files |
+| 02-03 | Component Refactoring | Pending | Simplified Body component API |
+| 02-04 | Testing | Pending | Web testing library tests |
 
-**Build outputs verified:**
-- dist/index.js (143KB ESM)
-- dist/index.cjs (145KB CJS)
-- dist/index.d.ts (TypeScript declarations)
-- Both import methods work (ESM and CJS)
-- No react-native references anywhere
+**Type system ready:**
+- BodyPartSlug: 44 values (38 bilateral + 4 centerline + 2 back-neck)
+- BodyPartData: { slug: BodyPartSlug, color: string } (both required)
+- ModelProps: onClick callback with (slug, event) signature
+- Types exported in dist/index.d.ts
+- Legacy types preserved for transition
 
 ---
 
 ## Session Continuity
 
-**Last session:** 2026-01-17T16:15Z
-**Stopped at:** Completed 01-03-PLAN.md (Build Verification) - Phase 1 Complete
-**Resume file:** None - ready for Phase 2 planning
+**Last session:** 2026-01-17T16:42Z
+**Stopped at:** Completed 02-01-PLAN.md (Type System)
+**Resume file:** None - ready for 02-02-PLAN.md
 
 **Context for next session:**
-- Phase 1 complete - package builds and exports correctly
-- Build: `npm run build` produces ESM + CJS bundles with types
-- Import: Both `import { Body }` and `require()` work
-- Ready for Phase 2: API and Component Implementation
-- Phase 2 focus: Tests, enhanced API, multi-view support
+- Type foundation complete in src/types.ts
+- BodyPartSlug defines target format for asset refactoring
+- Old types still work during migration period
+- Next: Refactor asset files to use bilateral slug prefixes
 
 ---
 *State initialized: 2026-01-17*
-*Last updated: 2026-01-17T16:15Z*
+*Last updated: 2026-01-17T16:42Z*
