@@ -46,6 +46,14 @@ Plans:
 
 **Dependencies:** Phase 1 complete
 
+**Plans:** 4 plans
+
+Plans:
+- [ ] 02-01-PLAN.md - Type system and API foundation (types.ts, type exports)
+- [ ] 02-02-PLAN.md - Asset refactoring (bilateral slug split: left-*/right-*)
+- [ ] 02-03-PLAN.md - Component refactoring (simplified API, remove intensity system)
+- [ ] 02-04-PLAN.md - Test migration and verification (web testing library)
+
 **Requirements:**
 - CORE-02: Render male body variant (front and back views)
 - CORE-03: Render female body variant (front and back views)
@@ -55,7 +63,7 @@ Plans:
 - INTR-02: Hover states with cursor pointer
 - INTR-03: Support disabling specific body parts
 - INTR-04: Support hiding specific body parts
-- API-01: Simplified component API: `<Model data={[...]} onPress={...} gender={...} side={...}/>`
+- API-01: Simplified component API: `<Body data={[...]} onClick={...} gender={...} side={...}/>`
 - API-02: Remove exercise-related references from codebase
 - API-03: Data prop accepts array of `{ slug: string, color: string }`
 - API-04: Export TypeScript types for all props and data structures
@@ -63,7 +71,7 @@ Plans:
 **Success Criteria:**
 1. User can render male/female body in front/back views by setting `gender` and `side` props
 2. User can highlight specific body parts by passing `data={[{ slug: "left-biceps", color: "#ff0000" }]}`
-3. User can click on any body part and receive the slug in the callback via `onPress`
+3. User can click on any body part and receive the slug in the callback via `onClick`
 4. User sees cursor change to pointer when hovering over interactive body parts
 5. User can disable parts (unclickable but visible) and hide parts (not rendered)
 
@@ -95,8 +103,8 @@ Plans:
 
 | Phase | Status | Requirements | Completion |
 |-------|--------|--------------|------------|
-| 1 - Foundation + Build System | ✓ Complete | 6 | 100% |
-| 2 - Core Migration | Pending | 12 | 0% |
+| 1 - Foundation + Build System | Complete | 6 | 100% |
+| 2 - Core Migration | Planned | 12 | 0% |
 | 3 - Polish + Publish | Pending | 5 | 0% |
 
 **Total:** 6/23 requirements complete (26%)
@@ -119,4 +127,4 @@ Phases are sequential. Each phase depends on the previous phase being complete.
 
 ---
 *Roadmap created: 2026-01-17*
-*Last updated: 2026-01-17 — Phase 1 complete*
+*Last updated: 2026-01-17 - Phase 2 planned*
