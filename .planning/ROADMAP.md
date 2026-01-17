@@ -19,9 +19,9 @@ Migration from react-native-body-highlighter to react-body-highlighter (web-only
 **Plans:** 3 plans
 
 Plans:
-- [ ] 01-01-PLAN.md - Build system setup (package.json, tsup, tsconfig)
-- [ ] 01-02-PLAN.md - SVG migration (react-native-svg to native SVG)
-- [ ] 01-03-PLAN.md - Build verification (confirm outputs)
+- [x] 01-01-PLAN.md - Build system setup (package.json, tsup, tsconfig)
+- [x] 01-02-PLAN.md - SVG migration (react-native-svg to native SVG)
+- [x] 01-03-PLAN.md - Build verification (confirm outputs)
 
 **Requirements:**
 - PKG-01: Rename package to react-body-highlighter
@@ -95,11 +95,11 @@ Plans:
 
 | Phase | Status | Requirements | Completion |
 |-------|--------|--------------|------------|
-| 1 - Foundation + Build System | Planned | 6 | 0% |
+| 1 - Foundation + Build System | ✓ Complete | 6 | 100% |
 | 2 - Core Migration | Pending | 12 | 0% |
 | 3 - Polish + Publish | Pending | 5 | 0% |
 
-**Total:** 0/23 requirements complete (0%)
+**Total:** 6/23 requirements complete (26%)
 
 ---
 
@@ -119,4 +119,4 @@ Phases are sequential. Each phase depends on the previous phase being complete.
 
 ---
 *Roadmap created: 2026-01-17*
-*Last updated: 2026-01-17*
+*Last updated: 2026-01-17 — Phase 1 complete*
