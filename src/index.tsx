@@ -8,6 +8,11 @@ import { bodyFemaleFront } from "./assets/bodyFemaleFront";
 import { bodyFemaleBack } from "./assets/bodyFemaleBack";
 import { SvgFemaleWrapper } from "./components/SvgFemaleWrapper";
 
+// Export new simplified types (v4.0.0 API)
+export type { BodyPartSlug, BodyPartData, ModelProps } from './types';
+
+// Legacy types below (kept for transition period, will be removed in Plan 03)
+
 export type Slug =
   | "abs"
   | "adductors"
