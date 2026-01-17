@@ -49,10 +49,10 @@ Plans:
 **Plans:** 4 plans
 
 Plans:
-- [ ] 02-01-PLAN.md - Type system and API foundation (types.ts, type exports)
-- [ ] 02-02-PLAN.md - Asset refactoring (bilateral slug split: left-*/right-*)
-- [ ] 02-03-PLAN.md - Component refactoring (simplified API, remove intensity system)
-- [ ] 02-04-PLAN.md - Test migration and verification (web testing library)
+- [x] 02-01-PLAN.md - Type system and API foundation (types.ts, type exports)
+- [x] 02-02-PLAN.md - Asset refactoring (bilateral slug split: left-*/right-*)
+- [x] 02-03-PLAN.md - Component refactoring (simplified API, remove intensity system)
+- [x] 02-04-PLAN.md - Test migration and verification (web testing library)
 
 **Requirements:**
 - CORE-02: Render male body variant (front and back views)
@@ -104,10 +104,10 @@ Plans:
 | Phase | Status | Requirements | Completion |
 |-------|--------|--------------|------------|
 | 1 - Foundation + Build System | Complete | 6 | 100% |
-| 2 - Core Migration | Planned | 12 | 0% |
+| 2 - Core Migration | Complete | 12 | 100% |
 | 3 - Polish + Publish | Pending | 5 | 0% |
 
-**Total:** 6/23 requirements complete (26%)
+**Total:** 18/23 requirements complete (78%)
 
 ---
 
@@ -127,4 +127,4 @@ Phases are sequential. Each phase depends on the previous phase being complete.
 
 ---
 *Roadmap created: 2026-01-17*
-*Last updated: 2026-01-17 - Phase 2 planned*
+*Last updated: 2026-01-17 - Phase 2 complete*

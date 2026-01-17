@@ -9,25 +9,25 @@ Requirements for web migration. Each maps to roadmap phases.
 
 ### Core Rendering
 
-- [ ] **CORE-01**: Replace react-native-svg with native browser SVG elements
-- [ ] **CORE-02**: Render male body variant (front and back views)
-- [ ] **CORE-03**: Render female body variant (front and back views)
-- [ ] **CORE-04**: Support per-part color highlighting via data prop
-- [ ] **CORE-05**: All bilateral muscles split into left/right (left-biceps, right-biceps, etc.)
+- [x] **CORE-01**: Replace react-native-svg with native browser SVG elements
+- [x] **CORE-02**: Render male body variant (front and back views)
+- [x] **CORE-03**: Render female body variant (front and back views)
+- [x] **CORE-04**: Support per-part color highlighting via data prop
+- [x] **CORE-05**: All bilateral muscles split into left/right (left-biceps, right-biceps, etc.)
 
 ### Interaction
 
-- [ ] **INTR-01**: onClick handler for each body part
-- [ ] **INTR-02**: Hover states with cursor pointer
-- [ ] **INTR-03**: Support disabling specific body parts
-- [ ] **INTR-04**: Support hiding specific body parts
+- [x] **INTR-01**: onClick handler for each body part
+- [x] **INTR-02**: Hover states with cursor pointer
+- [x] **INTR-03**: Support disabling specific body parts
+- [x] **INTR-04**: Support hiding specific body parts
 
 ### API
 
-- [ ] **API-01**: Simplified component API: `<Model data={[...]} onPress={...} gender={...} side={...}/>`
-- [ ] **API-02**: Remove exercise-related references from codebase
-- [ ] **API-03**: Data prop accepts array of `{ slug: string, color: string }`
-- [ ] **API-04**: Export TypeScript types for all props and data structures
+- [x] **API-01**: Simplified component API: `<Body data={[...]} onClick={...} gender={...} side={...}/>`
+- [x] **API-02**: Remove exercise-related references from codebase
+- [x] **API-03**: Data prop accepts array of `{ slug: string, color: string }`
+- [x] **API-04**: Export TypeScript types for all props and data structures
 
 ### Accessibility
 
@@ -36,11 +36,11 @@ Requirements for web migration. Each maps to roadmap phases.
 
 ### Build/Package
 
-- [ ] **PKG-01**: Rename package to react-body-highlighter
-- [ ] **PKG-02**: Update package.json for web-only React library
-- [ ] **PKG-03**: Remove all React Native dependencies
-- [ ] **PKG-04**: tsup bundler with ESM + CJS output
-- [ ] **PKG-05**: React 18/19 as peer dependency
+- [x] **PKG-01**: Rename package to react-body-highlighter
+- [x] **PKG-02**: Update package.json for web-only React library
+- [x] **PKG-03**: Remove all React Native dependencies
+- [x] **PKG-04**: tsup bundler with ESM + CJS output
+- [x] **PKG-05**: React 18/19 as peer dependency
 
 ### Documentation
 
@@ -87,26 +87,26 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| CORE-01 | Phase 1 | Pending |
-| CORE-02 | Phase 2 | Pending |
-| CORE-03 | Phase 2 | Pending |
-| CORE-04 | Phase 2 | Pending |
-| CORE-05 | Phase 2 | Pending |
-| INTR-01 | Phase 2 | Pending |
-| INTR-02 | Phase 2 | Pending |
-| INTR-03 | Phase 2 | Pending |
-| INTR-04 | Phase 2 | Pending |
-| API-01 | Phase 2 | Pending |
-| API-02 | Phase 2 | Pending |
-| API-03 | Phase 2 | Pending |
-| API-04 | Phase 2 | Pending |
+| CORE-01 | Phase 1 | Complete |
+| CORE-02 | Phase 2 | Complete |
+| CORE-03 | Phase 2 | Complete |
+| CORE-04 | Phase 2 | Complete |
+| CORE-05 | Phase 2 | Complete |
+| INTR-01 | Phase 2 | Complete |
+| INTR-02 | Phase 2 | Complete |
+| INTR-03 | Phase 2 | Complete |
+| INTR-04 | Phase 2 | Complete |
+| API-01 | Phase 2 | Complete |
+| API-02 | Phase 2 | Complete |
+| API-03 | Phase 2 | Complete |
+| API-04 | Phase 2 | Complete |
 | A11Y-01 | Phase 3 | Pending |
 | A11Y-02 | Phase 3 | Pending |
-| PKG-01 | Phase 1 | Pending |
-| PKG-02 | Phase 1 | Pending |
-| PKG-03 | Phase 1 | Pending |
-| PKG-04 | Phase 1 | Pending |
-| PKG-05 | Phase 1 | Pending |
+| PKG-01 | Phase 1 | Complete |
+| PKG-02 | Phase 1 | Complete |
+| PKG-03 | Phase 1 | Complete |
+| PKG-04 | Phase 1 | Complete |
+| PKG-05 | Phase 1 | Complete |
 | DOC-01 | Phase 3 | Pending |
 | DOC-02 | Phase 3 | Pending |
 | DOC-03 | Phase 3 | Pending |
@@ -118,4 +118,4 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 ---
 *Requirements defined: 2026-01-17*
-*Last updated: 2026-01-17 after roadmap creation*
+*Last updated: 2026-01-17 - Phase 2 complete (18/23)*
