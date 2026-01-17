@@ -16,6 +16,13 @@ Migration from react-native-body-highlighter to react-body-highlighter (web-only
 
 **Dependencies:** None (starting point)
 
+**Plans:** 3 plans
+
+Plans:
+- [ ] 01-01-PLAN.md - Build system setup (package.json, tsup, tsconfig)
+- [ ] 01-02-PLAN.md - SVG migration (react-native-svg to native SVG)
+- [ ] 01-03-PLAN.md - Build verification (confirm outputs)
+
 **Requirements:**
 - PKG-01: Rename package to react-body-highlighter
 - PKG-02: Update package.json for web-only React library
@@ -88,7 +95,7 @@ Migration from react-native-body-highlighter to react-body-highlighter (web-only
 
 | Phase | Status | Requirements | Completion |
 |-------|--------|--------------|------------|
-| 1 - Foundation + Build System | Pending | 6 | 0% |
+| 1 - Foundation + Build System | Planned | 6 | 0% |
 | 2 - Core Migration | Pending | 12 | 0% |
 | 3 - Polish + Publish | Pending | 5 | 0% |
 
