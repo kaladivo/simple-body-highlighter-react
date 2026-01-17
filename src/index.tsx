@@ -1,265 +1,79 @@
-import React, { memo, useCallback } from "react";
-import { differenceWith } from "./utils/differenceWith";
+import React, { useCallback, useMemo } from "react";
 
-import { bodyFront } from "./assets/bodyFront";
+import { bodyFront, BodyPartAsset } from "./assets/bodyFront";
 import { bodyBack } from "./assets/bodyBack";
-import { SvgMaleWrapper } from "./components/SvgMaleWrapper";
 import { bodyFemaleFront } from "./assets/bodyFemaleFront";
 import { bodyFemaleBack } from "./assets/bodyFemaleBack";
+import { SvgMaleWrapper } from "./components/SvgMaleWrapper";
 import { SvgFemaleWrapper } from "./components/SvgFemaleWrapper";
+import { BodyPartSlug, BodyPartData, ModelProps } from "./types";
 
-// Export new simplified types (v4.0.0 API)
-export type { BodyPartSlug, BodyPartData, ModelProps } from './types';
-
-// Legacy types below (kept for transition period, will be removed in Plan 03)
-
-export type Slug =
-  | "abs"
-  | "adductors"
-  | "ankles"
-  | "biceps"
-  | "calves"
-  | "chest"
-  | "deltoids"
-  | "deltoids"
-  | "feet"
-  | "forearm"
-  | "gluteal"
-  | "hamstring"
-  | "hands"
-  | "hair"
-  | "head"
-  | "knees"
-  | "lower-back"
-  | "neck"
-  | "obliques"
-  | "quadriceps"
-  | "tibialis"
-  | "trapezius"
-  | "triceps"
-  | "upper-back";
-
-export interface BodyPartStyles {
-  fill?: string;
-  stroke?: string;
-  strokeWidth?: number;
-}
-
-export interface BodyPart {
-  color?: string;
-  slug?: Slug;
-  path?: {
-    common?: string[];
-    left?: string[];
-    right?: string[];
-  };
-}
-
-export interface ExtendedBodyPart extends BodyPart {
-  color?: string;
-  intensity?: number;
-  side?: "left" | "right";
-  styles?: BodyPartStyles;
-}
-
-export type BodyProps = {
-  colors?: ReadonlyArray<string>;
-  data: ReadonlyArray<ExtendedBodyPart>;
-  scale?: number;
-  side?: "front" | "back";
-  gender?: "male" | "female";
-  onBodyPartPress?: (b: ExtendedBodyPart, side?: "left" | "right") => void;
-  border?: string | "none";
-  disabledParts?: Slug[];
-  hiddenParts?: Slug[];
-  defaultFill?: string;
-  defaultStroke?: string;
-  defaultStrokeWidth?: number;
-};
-
-const comparison = (a: ExtendedBodyPart, b: ExtendedBodyPart) =>
-  a.slug === b.slug;
+// Export types
+export type { BodyPartSlug, BodyPartData, ModelProps } from "./types";
 
 const Body = ({
-  colors = ["#0984e3", "#74b9ff"],
-  data,
-  scale = 1,
-  side = "front",
+  data = [],
+  onClick,
   gender = "male",
-  onBodyPartPress,
+  side = "front",
+  scale = 1,
   border = "#dfdfdf",
   disabledParts = [],
   hiddenParts = [],
   defaultFill = "#3f3f3f",
-  defaultStroke = "none",
-  defaultStrokeWidth = 0
-}: BodyProps) => {
-  const getPartStyles = useCallback(
-    (bodyPart: ExtendedBodyPart): BodyPartStyles => {
-      // Per-part styles override global defaults
-      return {
-        fill: bodyPart.styles?.fill ?? defaultFill,
-        stroke: bodyPart.styles?.stroke ?? defaultStroke,
-        strokeWidth: bodyPart.styles?.strokeWidth ?? defaultStrokeWidth,
-      };
+}: ModelProps) => {
+  // Create a Map for O(1) color lookup
+  const colorMap = useMemo(() => {
+    const map = new Map<BodyPartSlug, string>();
+    data.forEach((item) => map.set(item.slug, item.color));
+    return map;
+  }, [data]);
+
+  const getColor = useCallback(
+    (slug: BodyPartSlug): string => {
+      if (disabledParts.includes(slug)) return "#EBEBE4";
+      return colorMap.get(slug) ?? defaultFill;
     },
-    [defaultFill, defaultStroke, defaultStrokeWidth]
+    [colorMap, disabledParts, defaultFill]
   );
 
-  const mergedBodyParts = useCallback(
-    (dataSource: ReadonlyArray<BodyPart>) => {
-      const filteredDataSource = dataSource.filter(
-        (part) => !hiddenParts.includes(part.slug!)
-      );
-
-      // Create a map of user data by slug for faster lookup
-      const userDataMap = new Map<string, ExtendedBodyPart>();
-      data.forEach(userPart => {
-        if (userPart.slug) {
-          userDataMap.set(userPart.slug, userPart);
-        }
-      });
-
-      // Merge asset body parts with user data
-      return filteredDataSource.map((assetPart): ExtendedBodyPart => {
-        const userPart = userDataMap.get(assetPart.slug!);
-
-        if (!userPart) {
-          // No user data for this part, return as-is
-          return assetPart;
-        }
-
-        // Merge asset part (has path) with user part (has styles, color, etc.)
-        const merged: ExtendedBodyPart = {
-          ...assetPart,
-          // Explicitly copy user properties
-          styles: userPart.styles,
-          intensity: userPart.intensity,
-          side: userPart.side,
-          color: userPart.color,
-        };
-
-        // Set color fallback based on intensity if provided
-        if (!merged.styles?.fill && !merged.color && merged.intensity) {
-          merged.color = colors[merged.intensity - 1];
-        }
-
-        return merged;
-      });
-    },
-    [data, colors, hiddenParts]
-  );
-
-  const getColorToFill = (bodyPart: ExtendedBodyPart) => {
-    if (bodyPart.slug && disabledParts.includes(bodyPart.slug)) {
-      return "#EBEBE4";
+  const getAssets = (): BodyPartAsset[] => {
+    if (gender === "female") {
+      return side === "front" ? bodyFemaleFront : bodyFemaleBack;
     }
-
-    // Priority: per-part styles.fill > color prop > intensity-based color > default
-    if (bodyPart.styles?.fill) {
-      return bodyPart.styles.fill;
-    }
-
-    if (bodyPart.color) {
-      return bodyPart.color;
-    }
-
-    if (bodyPart.intensity && bodyPart.intensity > 0) {
-      return colors[bodyPart.intensity - 1];
-    }
-
-    return undefined; // Let getPartStyles provide the default
+    return side === "front" ? bodyFront : bodyBack;
   };
 
-  const isPartDisabled = (slug?: Slug) => slug && disabledParts.includes(slug);
-
-  const renderBodySvg = (bodyToRender: ReadonlyArray<BodyPart>) => {
+  const renderBodySvg = (assets: BodyPartAsset[]) => {
     const SvgWrapper = gender === "male" ? SvgMaleWrapper : SvgFemaleWrapper;
 
     return (
       <SvgWrapper side={side} scale={scale} border={border}>
-        {mergedBodyParts(bodyToRender).map((bodyPart: ExtendedBodyPart) => {
-          const commonPaths = (bodyPart.path?.common || []).map((path) => {
-            const partStyles = getPartStyles(bodyPart);
-            const fillColor = getColorToFill(bodyPart);
+        {assets.map((part) => {
+          if (hiddenParts.includes(part.slug)) return null;
 
-            return (
-              <path
-                key={path}
-                onClick={
-                  isPartDisabled(bodyPart.slug)
-                    ? undefined
-                    : () => onBodyPartPress?.(bodyPart)
-                }
-                style={{ cursor: isPartDisabled(bodyPart.slug) ? 'default' : 'pointer' }}
-                aria-disabled={isPartDisabled(bodyPart.slug)}
-                id={bodyPart.slug}
-                fill={fillColor ?? partStyles.fill}
-                stroke={partStyles.stroke}
-                strokeWidth={partStyles.strokeWidth}
-                d={path}
-              />
-            );
-          });
+          const isDisabled = disabledParts.includes(part.slug);
+          const fillColor = getColor(part.slug);
 
-          const leftPaths = (bodyPart.path?.left || []).map((path) => {
-            const isOnlyRight =
-              data.find((d) => d.slug === bodyPart.slug)?.side === "right";
-            const partStyles = getPartStyles(bodyPart);
-            const fillColor = isOnlyRight ? defaultFill : getColorToFill(bodyPart);
-
-            return (
-              <path
-                key={path}
-                onClick={
-                  isPartDisabled(bodyPart.slug)
-                    ? undefined
-                    : () => onBodyPartPress?.(bodyPart, "left")
-                }
-                style={{ cursor: isPartDisabled(bodyPart.slug) ? 'default' : 'pointer' }}
-                id={bodyPart.slug}
-                fill={fillColor ?? partStyles.fill}
-                stroke={partStyles.stroke}
-                strokeWidth={partStyles.strokeWidth}
-                d={path}
-              />
-            );
-          });
-          const rightPaths = (bodyPart.path?.right || []).map((path) => {
-            const isOnlyLeft =
-              data.find((d) => d.slug === bodyPart.slug)?.side === "left";
-            const partStyles = getPartStyles(bodyPart);
-            const fillColor = isOnlyLeft ? defaultFill : getColorToFill(bodyPart);
-
-            return (
-              <path
-                key={path}
-                onClick={
-                  isPartDisabled(bodyPart.slug)
-                    ? undefined
-                    : () => onBodyPartPress?.(bodyPart, "right")
-                }
-                style={{ cursor: isPartDisabled(bodyPart.slug) ? 'default' : 'pointer' }}
-                id={bodyPart.slug}
-                fill={fillColor ?? partStyles.fill}
-                stroke={partStyles.stroke}
-                strokeWidth={partStyles.strokeWidth}
-                d={path}
-              />
-            );
-          });
-
-          return [...commonPaths, ...leftPaths, ...rightPaths];
+          return part.pathData.map((pathD, index) => (
+            <path
+              key={`${part.slug}-${index}`}
+              d={pathD}
+              fill={fillColor}
+              onClick={
+                isDisabled ? undefined : (e) => onClick?.(part.slug, e)
+              }
+              style={{ cursor: isDisabled ? "default" : "pointer" }}
+              aria-disabled={isDisabled || undefined}
+              data-testid={part.slug}
+            />
+          ));
         })}
       </SvgWrapper>
     );
   };
 
-  if (gender === "female") {
-    return renderBodySvg(side === "front" ? bodyFemaleFront : bodyFemaleBack);
-  }
-
-  return renderBodySvg(side === "front" ? bodyFront : bodyBack);
+  return renderBodySvg(getAssets());
 };
 
 export default Body;
