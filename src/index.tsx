@@ -1,5 +1,4 @@
 import React, { memo, useCallback } from "react";
-import { Path } from "react-native-svg";
 import { differenceWith } from "./utils/differenceWith";
 
 import { bodyFront } from "./assets/bodyFront";
@@ -180,13 +179,14 @@ const Body = ({
             const fillColor = getColorToFill(bodyPart);
 
             return (
-              <Path
+              <path
                 key={path}
-                onPress={
+                onClick={
                   isPartDisabled(bodyPart.slug)
                     ? undefined
                     : () => onBodyPartPress?.(bodyPart)
                 }
+                style={{ cursor: isPartDisabled(bodyPart.slug) ? 'default' : 'pointer' }}
                 aria-disabled={isPartDisabled(bodyPart.slug)}
                 id={bodyPart.slug}
                 fill={fillColor ?? partStyles.fill}
@@ -204,13 +204,14 @@ const Body = ({
             const fillColor = isOnlyRight ? defaultFill : getColorToFill(bodyPart);
 
             return (
-              <Path
+              <path
                 key={path}
-                onPress={
+                onClick={
                   isPartDisabled(bodyPart.slug)
                     ? undefined
                     : () => onBodyPartPress?.(bodyPart, "left")
                 }
+                style={{ cursor: isPartDisabled(bodyPart.slug) ? 'default' : 'pointer' }}
                 id={bodyPart.slug}
                 fill={fillColor ?? partStyles.fill}
                 stroke={partStyles.stroke}
@@ -226,13 +227,14 @@ const Body = ({
             const fillColor = isOnlyLeft ? defaultFill : getColorToFill(bodyPart);
 
             return (
-              <Path
+              <path
                 key={path}
-                onPress={
+                onClick={
                   isPartDisabled(bodyPart.slug)
                     ? undefined
                     : () => onBodyPartPress?.(bodyPart, "right")
                 }
+                style={{ cursor: isPartDisabled(bodyPart.slug) ? 'default' : 'pointer' }}
                 id={bodyPart.slug}
                 fill={fillColor ?? partStyles.fill}
                 stroke={partStyles.stroke}
@@ -256,3 +258,4 @@ const Body = ({
 };
 
 export default Body;
+export { Body };
