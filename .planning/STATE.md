@@ -10,20 +10,20 @@
 
 ## Current Position
 
-**Phase:** 2 of 3 (Core Migration) COMPLETE
-**Plan:** 4 of 4 complete
-**Status:** Phase 2 complete
-**Last activity:** 2026-01-17 - Completed 02-04-PLAN.md (Testing)
+**Phase:** 3 of 3 (Polish + Publish)
+**Plan:** 2 of 3 complete
+**Status:** In progress
+**Last activity:** 2026-01-18 - Completed 03-02-PLAN.md (Documentation)
 
 **Progress:**
 ```
 Phase 1: [##########] 100% (3/3 plans) COMPLETE
 Phase 2: [##########] 100% (4/4 plans) COMPLETE
-Phase 3: [..........] 0%
-Overall: [#######...] ~78% (7/9 estimated plans)
+Phase 3: [######....] 67% (2/3 plans)
+Overall: [#########.] ~90% (9/10 plans)
 ```
 
-**Next Action:** Plan and execute Phase 3 (Documentation)
+**Next Action:** Execute 03-03 (CHANGELOG + Publish)
 
 ---
 
@@ -31,9 +31,9 @@ Overall: [#######...] ~78% (7/9 estimated plans)
 
 | Metric | Value |
 |--------|-------|
-| Session count | 7 |
-| Plans completed | 7 |
-| Requirements done | 19/23 |
+| Session count | 8 |
+| Plans completed | 9 |
+| Requirements done | 21/23 |
 | Phases complete | 2/3 |
 
 ---
@@ -67,6 +67,9 @@ Overall: [#######...] ~78% (7/9 estimated plans)
 | Removed differenceWith.ts | No longer needed with Map-based lookup | 2026-01-17 |
 | @testing-library/react for web | Replaced RN testing library | 2026-01-17 |
 | Web babel presets | Replaced @react-native/babel-preset | 2026-01-17 |
+| Visual first README | Screenshots at top before installation | 2026-01-18 |
+| TypeScript examples only | No JavaScript variants in docs | 2026-01-18 |
+| Separate BODY_PARTS.md | Slug reference linked from README | 2026-01-18 |
 
 ### Technical Notes
 
@@ -98,7 +101,10 @@ Overall: [#######...] ~78% (7/9 estimated plans)
 - [x] Execute 02-02 (Asset Refactoring)
 - [x] Execute 02-03 (Component Refactoring)
 - [x] Execute 02-04 (Testing)
-- [ ] Plan Phase 3 (Documentation)
+- [x] Plan Phase 3
+- [x] Execute 03-01 (Accessibility)
+- [x] Execute 03-02 (Documentation)
+- [ ] Execute 03-03 (CHANGELOG + Publish)
 
 ### Blockers
 
@@ -106,58 +112,36 @@ None
 
 ---
 
-## Phase 2 Progress
+## Phase 3 Progress
 
-**Phase 2: Core Migration** is COMPLETE.
+**Phase 3: Polish + Publish** in progress.
 
 | Plan | Name | Status | Key Output |
 |------|------|--------|------------|
-| 02-01 | Type System | Complete | src/types.ts with BodyPartSlug, BodyPartData, ModelProps |
-| 02-02 | Asset Refactoring | Complete | 4 asset files with bilateral slug split |
-| 02-03 | Component Refactoring | Complete | Simplified Body component API |
-| 02-04 | Testing | Complete | 18 web tests with @testing-library/react |
+| 03-01 | Accessibility | Complete | ARIA labels, keyboard navigation |
+| 03-02 | Documentation | Complete | README.md updated, BODY_PARTS.md created |
+| 03-03 | CHANGELOG + Publish | Pending | - |
 
-**Type system ready:**
-- BodyPartSlug: 44 values (38 bilateral + 4 centerline + 2 back-neck)
-- BodyPartData: { slug: BodyPartSlug, color: string } (both required)
-- ModelProps: onClick callback with (slug, event) signature
-- Types exported in dist/index.d.ts
-
-**Asset refactoring complete:**
-- All 4 asset files use BodyPartAsset type
-- Bilateral muscles split into left-*/right-* entries
-- Centerline muscles use unprefixed slugs
-- pathData is flat string[] array
-- No color field in assets
-
-**Component refactoring complete:**
-- Body component uses ModelProps type
-- Map-based color lookup for O(1) performance
-- onClick callback with (slug, event)
-- No intensity system, no colors array, no onBodyPartPress
-- Legacy types removed from src/index.tsx
-- differenceWith.ts deleted
-- Build produces clean ESM + CJS output
-
-**Testing complete:**
-- @testing-library/react with jsdom environment
-- 18 tests covering rendering, colors, clicks, disabled/hidden, scaling
-- All tests pass
+**Documentation ready:**
+- README updated with v4.0.0 API and TypeScript examples
+- BODY_PARTS.md with all 44 slugs alphabetically listed
+- Props table matching ModelProps type
+- Breaking changes section for v3.x migration
 
 ---
 
 ## Session Continuity
 
-**Last session:** 2026-01-17T17:40Z
-**Stopped at:** Completed 02-04-PLAN.md (Testing) - awaiting checkpoint verification
+**Last session:** 2026-01-18T08:31Z
+**Stopped at:** Completed 03-02-PLAN.md (Documentation)
 **Resume file:** None
 
 **Context for next session:**
-- Phase 2 complete - all 4 plans executed
-- 18 tests verify Body component functionality
-- Build, typecheck, and tests all pass
-- Ready for Phase 3 (Documentation) after verification
+- Documentation complete
+- README shows correct package name and API
+- BODY_PARTS.md provides slug reference
+- Ready for 03-03 (CHANGELOG update and publish)
 
 ---
 *State initialized: 2026-01-17*
-*Last updated: 2026-01-17T17:40Z*
+*Last updated: 2026-01-18T08:31Z*
