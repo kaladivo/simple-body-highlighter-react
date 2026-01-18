@@ -165,4 +165,54 @@ describe('Body Component', () => {
       expect(svg).toHaveAttribute('height', '800');
     });
   });
+
+  describe('Accessibility', () => {
+    it('applies role="button" to body parts', () => {
+      render(<Body data={[{ slug: 'abs', color: '#ff0000' }]} />);
+      const parts = screen.getAllByTestId('abs');
+      parts.forEach(part => {
+        expect(part).toHaveAttribute('role', 'button');
+      });
+    });
+
+    it('applies aria-label with readable name', () => {
+      render(<Body data={[{ slug: 'left-biceps', color: '#ff0000' }]} />);
+      const parts = screen.getAllByTestId('left-biceps');
+      parts.forEach(part => {
+        expect(part).toHaveAttribute('aria-label', 'left biceps');
+      });
+    });
+
+    it('makes body parts keyboard focusable', () => {
+      render(<Body data={[{ slug: 'abs', color: '#ff0000' }]} />);
+      const parts = screen.getAllByTestId('abs');
+      parts.forEach(part => {
+        expect(part).toHaveAttribute('tabindex', '0');
+      });
+    });
+
+    it('excludes disabled parts from tab order', () => {
+      render(<Body data={[{ slug: 'abs', color: '#ff0000' }]} disabledParts={['abs']} />);
+      const parts = screen.getAllByTestId('abs');
+      parts.forEach(part => {
+        expect(part).toHaveAttribute('tabindex', '-1');
+      });
+    });
+
+    it('triggers onClick on Enter key', () => {
+      const handleClick = jest.fn();
+      render(<Body data={[{ slug: 'abs', color: '#ff0000' }]} onClick={handleClick} />);
+      const part = screen.getAllByTestId('abs')[0];
+      fireEvent.keyDown(part, { key: 'Enter' });
+      expect(handleClick).toHaveBeenCalledWith('abs', expect.any(Object));
+    });
+
+    it('triggers onClick on Space key', () => {
+      const handleClick = jest.fn();
+      render(<Body data={[{ slug: 'abs', color: '#ff0000' }]} onClick={handleClick} />);
+      const part = screen.getAllByTestId('abs')[0];
+      fireEvent.keyDown(part, { key: ' ' });
+      expect(handleClick).toHaveBeenCalledWith('abs', expect.any(Object));
+    });
+  });
 });
