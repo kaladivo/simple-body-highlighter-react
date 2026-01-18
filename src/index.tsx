@@ -11,6 +11,21 @@ import { BodyPartSlug, BodyPartData, ModelProps } from "./types";
 // Export types
 export type { BodyPartSlug, BodyPartData, ModelProps } from "./types";
 
+/**
+ * Handle keyboard events on body part paths.
+ * Triggers onClick on Enter or Space key press for accessibility.
+ */
+const handleKeyDown = (
+  slug: BodyPartSlug,
+  onClick: ModelProps["onClick"],
+  e: React.KeyboardEvent<SVGPathElement>
+) => {
+  if (e.key === "Enter" || e.key === " ") {
+    e.preventDefault();
+    onClick?.(slug, e as unknown as React.MouseEvent<SVGPathElement>);
+  }
+};
+
 const Body = ({
   data = [],
   onClick,
@@ -63,7 +78,15 @@ const Body = ({
               onClick={
                 isDisabled ? undefined : (e) => onClick?.(part.slug, e)
               }
+              onKeyDown={
+                isDisabled
+                  ? undefined
+                  : (e) => handleKeyDown(part.slug, onClick, e)
+              }
               style={{ cursor: isDisabled ? "default" : "pointer" }}
+              role="button"
+              tabIndex={isDisabled ? -1 : 0}
+              aria-label={part.slug.replace(/-/g, " ")}
               aria-disabled={isDisabled || undefined}
               data-testid={part.slug}
             />
