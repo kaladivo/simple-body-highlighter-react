@@ -83,6 +83,12 @@ Plans:
 
 **Dependencies:** Phase 2 complete
 
+**Plans:** 2 plans
+
+Plans:
+- [ ] 03-01-PLAN.md - Accessibility (ARIA labels, keyboard navigation)
+- [ ] 03-02-PLAN.md - Documentation (README rewrite, body parts reference)
+
 **Requirements:**
 - A11Y-01: ARIA labels on interactive body parts
 - A11Y-02: Role attributes on SVG elements
@@ -105,7 +111,7 @@ Plans:
 |-------|--------|--------------|------------|
 | 1 - Foundation + Build System | Complete | 6 | 100% |
 | 2 - Core Migration | Complete | 12 | 100% |
-| 3 - Polish + Publish | Pending | 5 | 0% |
+| 3 - Polish + Publish | Planned | 5 | 0% |
 
 **Total:** 18/23 requirements complete (78%)
 
@@ -127,4 +133,4 @@ Phases are sequential. Each phase depends on the previous phase being complete.
 
 ---
 *Roadmap created: 2026-01-17*
-*Last updated: 2026-01-17 - Phase 2 complete*
+*Last updated: 2026-01-18 - Phase 3 planned*
