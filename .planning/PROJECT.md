@@ -1,10 +1,21 @@
-# react-body-highlighter
+# simple-body-highlighter-react
 
 ## What This Is
 
 A React component library for rendering interactive human body SVGs in the browser. Users can highlight specific body parts (muscle groups) with custom colors and respond to clicks on individual regions. Supports male/female body variants with front/back views.
 
 Shipped v4.0 on 2026-01-19 — complete web migration from react-native-body-highlighter.
+
+## Current Milestone: v1.0.0 Publish to npm
+
+**Goal:** Rename package to simple-body-highlighter-react, clean up any react-native remnants, publish to npm with automated GitHub Actions workflow.
+
+**Target features:**
+- Rename package from react-body-highlighter to simple-body-highlighter-react
+- Remove all react-native related files and references
+- Push to new GitHub remote (kaladivo/simple-body-highlighter-react)
+- Complete README with installation and usage documentation
+- GitHub Actions workflow for automated npm publishing on git tags
 
 ## Core Value
 
@@ -29,7 +40,12 @@ Display and interact with body parts visually — highlight muscle groups with p
 
 ### Active
 
-(None — planning next milestone)
+- [ ] Rename package to simple-body-highlighter-react
+- [ ] Remove react-native remnants from codebase
+- [ ] Verify build outputs correctly
+- [ ] Push to new GitHub remote
+- [ ] README with install and usage examples
+- [ ] GitHub Actions npm publish workflow (on git tags)
 
 ### Out of Scope
 
@@ -49,9 +65,10 @@ Display and interact with body parts visually — highlight muscle groups with p
 - 44 body part slugs documented in BODY_PARTS.md
 
 **Package:**
-- Name: react-body-highlighter
-- Version: 4.0.0
+- Name: simple-body-highlighter-react (renaming from react-body-highlighter)
+- Version: 1.0.0 (fresh start with new package name)
 - Peer dependencies: react ^18.0.0 || ^19.0.0
+- npm: unscoped, published via GitHub Actions on git tags
 
 ## Constraints
 
@@ -70,5 +87,7 @@ Display and interact with body parts visually — highlight muscle groups with p
 | role="button" for paths | Standard accessible interactive pattern | ✓ Good |
 | Map-based color lookup | O(1) performance vs array merging | ✓ Good |
 
+| simple-body-highlighter-react | New package name for npm clarity | — Pending |
+
 ---
-*Last updated: 2026-01-19 after v4.0 milestone*
+*Last updated: 2026-01-19 after v1.0.0 milestone planning*
