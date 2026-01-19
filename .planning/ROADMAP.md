@@ -86,8 +86,8 @@ Plans:
 **Plans:** 2 plans
 
 Plans:
-- [ ] 03-01-PLAN.md - Accessibility (ARIA labels, keyboard navigation)
-- [ ] 03-02-PLAN.md - Documentation (README rewrite, body parts reference)
+- [x] 03-01-PLAN.md - Accessibility (ARIA labels, keyboard navigation)
+- [x] 03-02-PLAN.md - Documentation (README rewrite, body parts reference)
 
 **Requirements:**
 - A11Y-01: ARIA labels on interactive body parts
@@ -111,9 +111,9 @@ Plans:
 |-------|--------|--------------|------------|
 | 1 - Foundation + Build System | Complete | 6 | 100% |
 | 2 - Core Migration | Complete | 12 | 100% |
-| 3 - Polish + Publish | Planned | 5 | 0% |
+| 3 - Polish + Publish | Complete | 5 | 100% |
 
-**Total:** 18/23 requirements complete (78%)
+**Total:** 23/23 requirements complete (100%)
 
 ---
 
@@ -133,4 +133,4 @@ Phases are sequential. Each phase depends on the previous phase being complete.
 
 ---
 *Roadmap created: 2026-01-17*
-*Last updated: 2026-01-18 - Phase 3 planned*
+*Last updated: 2026-01-19 - v4.0 milestone complete*
