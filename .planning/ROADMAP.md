@@ -1,136 +1,98 @@
-# Roadmap: react-body-highlighter
+# Roadmap: simple-body-highlighter-react v1.0.0
 
-**Created:** 2026-01-17
-**Depth:** Quick (3 phases)
-**Coverage:** 23/23 v1 requirements mapped
+**Milestone:** v1.0.0 Publish to npm
+**Phases:** 2
+**Depth:** Quick
+**Created:** 2026-01-19
+
+---
 
 ## Overview
 
-Migration from react-native-body-highlighter to react-body-highlighter (web-only). Three phases: foundation/build setup, core migration with full feature parity, and polish/publish. Each phase delivers a verifiable capability.
+Rename package from react-body-highlighter to simple-body-highlighter-react, clean up react-native remnants, and publish to npm with automated GitHub Actions workflow. Two phases: first handles package identity and build verification, second handles remote setup and publish automation.
 
 ---
 
-## Phase 1: Foundation + Build System
+## Phase 1: Package Identity and Build Verification
 
-**Goal:** Project builds and exports a minimal working React component with native SVG
+**Goal:** Package is renamed, cleaned of react-native artifacts, and builds correctly
 
-**Dependencies:** None (starting point)
-
-**Plans:** 3 plans
-
-Plans:
-- [x] 01-01-PLAN.md - Build system setup (package.json, tsup, tsconfig)
-- [x] 01-02-PLAN.md - SVG migration (react-native-svg to native SVG)
-- [x] 01-03-PLAN.md - Build verification (confirm outputs)
+**Dependencies:** None (first phase)
 
 **Requirements:**
-- PKG-01: Rename package to react-body-highlighter
-- PKG-02: Update package.json for web-only React library
-- PKG-03: Remove all React Native dependencies
-- PKG-04: tsup bundler with ESM + CJS output
-- PKG-05: React 18/19 as peer dependency
-- CORE-01: Replace react-native-svg with native browser SVG elements
+- REN-01: Update package.json name to `simple-body-highlighter-react`
+- REN-02: Update package.json version to `1.0.0`
+- REN-03: Update all internal references to old package name
+- CLN-01: Remove any react-native specific files
+- CLN-02: Remove react-native references from code/comments
+- CLN-03: Verify no react-native dependencies remain in package.json
+- BLD-01: Confirm build outputs ESM + CJS correctly
+- BLD-02: Verify TypeScript declarations generate
+- BLD-03: Ensure all tests pass
 
 **Success Criteria:**
-1. User can `npm install` the package and import `{ Body }` from 'react-body-highlighter'
-2. Package exports ESM and CJS bundles (verified via `ls dist/`)
-3. TypeScript declarations are generated (`.d.ts` files exist in output)
-4. No react-native or react-native-svg in node_modules after install
-5. A minimal `<Body />` renders an SVG element in the browser (verified in test app)
+1. `npm run build` completes without errors and produces dist/ with ESM and CJS bundles
+2. `npm run test` passes all 24 tests with no failures
+3. package.json shows name as `simple-body-highlighter-react` and version as `1.0.0`
+4. `grep -r "react-native" src/` returns no matches (zero react-native references in source)
 
 ---
 
-## Phase 2: Core Migration
+## Phase 2: Remote, Documentation, and CI/CD
 
-**Goal:** All existing functionality works with the new web-based implementation
+**Goal:** Package is on new GitHub remote with docs and automated npm publishing
 
-**Dependencies:** Phase 1 complete
-
-**Plans:** 4 plans
-
-Plans:
-- [x] 02-01-PLAN.md - Type system and API foundation (types.ts, type exports)
-- [x] 02-02-PLAN.md - Asset refactoring (bilateral slug split: left-*/right-*)
-- [x] 02-03-PLAN.md - Component refactoring (simplified API, remove intensity system)
-- [x] 02-04-PLAN.md - Test migration and verification (web testing library)
+**Dependencies:** Phase 1 (package must be renamed and building before publishing)
 
 **Requirements:**
-- CORE-02: Render male body variant (front and back views)
-- CORE-03: Render female body variant (front and back views)
-- CORE-04: Support per-part color highlighting via data prop
-- CORE-05: All bilateral muscles split into left/right (left-biceps, right-biceps, etc.)
-- INTR-01: onClick handler for each body part
-- INTR-02: Hover states with cursor pointer
-- INTR-03: Support disabling specific body parts
-- INTR-04: Support hiding specific body parts
-- API-01: Simplified component API: `<Body data={[...]} onClick={...} gender={...} side={...}/>`
-- API-02: Remove exercise-related references from codebase
-- API-03: Data prop accepts array of `{ slug: string, color: string }`
-- API-04: Export TypeScript types for all props and data structures
+- GIT-01: Add new remote for kaladivo/simple-body-highlighter-react
+- GIT-02: Push codebase to new remote
+- DOC-04: README with installation instructions
+- DOC-05: README with basic usage examples
+- DOC-06: README with props documentation
+- DOC-07: README with body parts reference link
+- CI-01: GitHub Actions workflow file (.github/workflows/publish.yml)
+- CI-02: Trigger workflow on git tag push (v*)
+- CI-03: Configure npm publish step
+- CI-04: Document NPM_TOKEN secret setup in README
 
 **Success Criteria:**
-1. User can render male/female body in front/back views by setting `gender` and `side` props
-2. User can highlight specific body parts by passing `data={[{ slug: "left-biceps", color: "#ff0000" }]}`
-3. User can click on any body part and receive the slug in the callback via `onClick`
-4. User sees cursor change to pointer when hovering over interactive body parts
-5. User can disable parts (unclickable but visible) and hide parts (not rendered)
-
----
-
-## Phase 3: Polish + Publish
-
-**Goal:** Package is accessible, documented, and published to npm
-
-**Dependencies:** Phase 2 complete
-
-**Plans:** 2 plans
-
-Plans:
-- [x] 03-01-PLAN.md - Accessibility (ARIA labels, keyboard navigation)
-- [x] 03-02-PLAN.md - Documentation (README rewrite, body parts reference)
-
-**Requirements:**
-- A11Y-01: ARIA labels on interactive body parts
-- A11Y-02: Role attributes on SVG elements
-- DOC-01: Update README with new installation instructions
-- DOC-02: Update README with new API examples
-- DOC-03: Document all available body part slugs
-
-**Success Criteria:**
-1. Screen reader announces body part names when user navigates to them
-2. SVG container has appropriate `role` attribute for accessibility tools
-3. README shows correct installation command (`npm install react-body-highlighter`)
-4. README includes working code examples that match the actual API
-5. User can find complete list of available body part slugs in documentation
+1. `git remote -v` shows origin pointing to kaladivo/simple-body-highlighter-react
+2. README.md contains `npm install simple-body-highlighter-react` installation command
+3. README.md contains working code example showing `<Body data={[...]} onClick={...} />` usage
+4. `.github/workflows/publish.yml` exists and triggers on `v*` tag push
+5. Pushing a `v1.0.0` tag triggers the publish workflow (verifiable in GitHub Actions)
 
 ---
 
 ## Progress
 
-| Phase | Status | Requirements | Completion |
-|-------|--------|--------------|------------|
-| 1 - Foundation + Build System | Complete | 6 | 100% |
-| 2 - Core Migration | Complete | 12 | 100% |
-| 3 - Polish + Publish | Complete | 5 | 100% |
+| Phase | Name | Requirements | Status |
+|-------|------|--------------|--------|
+| 1 | Package Identity and Build Verification | 9 | Pending |
+| 2 | Remote, Documentation, and CI/CD | 10 | Pending |
 
-**Total:** 23/23 requirements complete (100%)
-
----
-
-## Dependency Graph
-
-```
-Phase 1: Foundation + Build System
-    |
-    v
-Phase 2: Core Migration
-    |
-    v
-Phase 3: Polish + Publish
-```
-
-Phases are sequential. Each phase depends on the previous phase being complete.
+**Total:** 19 requirements mapped, 0 complete
 
 ---
-*Roadmap created: 2026-01-17*
-*Last updated: 2026-01-19 - v4.0 milestone complete*
+
+## Coverage Validation
+
+```
+Phase 1 (9 requirements):
+  REN-01, REN-02, REN-03
+  CLN-01, CLN-02, CLN-03
+  BLD-01, BLD-02, BLD-03
+
+Phase 2 (10 requirements):
+  GIT-01, GIT-02
+  DOC-04, DOC-05, DOC-06, DOC-07
+  CI-01, CI-02, CI-03, CI-04
+
+Mapped: 19/19
+Orphaned: 0
+```
+
+---
+*Roadmap created: 2026-01-19*
+*Last updated: 2026-01-19*

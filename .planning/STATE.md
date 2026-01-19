@@ -1,4 +1,4 @@
-# Project State: react-body-highlighter
+# Project State: simple-body-highlighter-react
 
 ## Project Reference
 
@@ -6,25 +6,25 @@ See: .planning/PROJECT.md (updated 2026-01-19)
 
 **Core value:** Display and interact with body parts visually -- highlight muscle groups with per-part colors and handle user selection
 
-**Current focus:** v4.0 shipped — planning next milestone
+**Current focus:** v1.0.0 npm publish milestone
 
 ---
 
 ## Current Position
 
-**Phase:** v4.0 complete (3/3 phases shipped)
-**Status:** Milestone complete
-**Last activity:** 2026-01-19 — v4.0 milestone archived
+**Milestone:** v1.0.0 Publish to npm
+**Phase:** 1 - Package Identity and Build Verification
+**Plan:** Not started
+**Status:** Ready to plan Phase 1
 
 **Progress:**
 ```
-Phase 1: [##########] 100% (3/3 plans) COMPLETE
-Phase 2: [##########] 100% (4/4 plans) COMPLETE
-Phase 3: [##########] 100% (2/2 plans) COMPLETE
-v4.0:    [##########] 100% — SHIPPED
+Phase 1: [          ] 0% (0/9 requirements)
+Phase 2: [          ] 0% (0/10 requirements)
+v1.0.0:  [          ] 0% (0/19 requirements)
 ```
 
-**Next Action:** Start next milestone with `/gsd:new-milestone`
+**Next Action:** `/gsd:plan-phase 1` to create execution plan
 
 ---
 
@@ -32,52 +32,58 @@ v4.0:    [##########] 100% — SHIPPED
 
 | Metric | Value |
 |--------|-------|
-| Session count | 9 |
-| Plans completed | 9 |
-| Requirements done | 23/23 |
-| Phases complete | 3/3 |
-| Milestone | v4.0 shipped |
+| Session count | 0 |
+| Plans completed | 0 |
+| Requirements done | 0/19 |
+| Phases complete | 0/2 |
+| Milestone | v1.0.0 in progress |
 
 ---
 
-## Milestone Summary
+## Milestone Context
 
-**v4.0 Web Migration** shipped 2026-01-19
+**v1.0.0 Publish to npm**
 
-- 3 phases, 9 plans, 23 requirements
-- 73 files modified, 1,473 lines TypeScript
-- 3 days development (2026-01-17 → 2026-01-19)
+Goal: Rename to simple-body-highlighter-react, clean react-native remnants, publish via GitHub Actions.
 
-Archives:
-- `.planning/milestones/v4.0-ROADMAP.md`
-- `.planning/milestones/v4.0-REQUIREMENTS.md`
-- `.planning/MILESTONES.md`
+Phases:
+1. Package Identity and Build Verification (9 requirements)
+2. Remote, Documentation, and CI/CD (10 requirements)
+
+Prior milestone: v4.0 Web Migration (shipped 2026-01-19)
 
 ---
 
 ## Accumulated Context
 
-### Key Decisions (v4.0)
+### Key Decisions (v4.0 - carried forward)
 
 | Decision | Rationale | Outcome |
-|----------|-----------|-------|
-| Web-only (drop RN) | Simpler codebase, clear target audience | ✓ Good |
-| Inline SVG | No dependencies, native browser support | ✓ Good |
-| Per-part colors | More flexible than intensity system | ✓ Good |
-| Left/right prefixes | Explicit control over bilateral muscles | ✓ Good |
-| role="button" for paths | Standard accessible interactive pattern | ✓ Good |
-| Map-based color lookup | O(1) performance vs array merging | ✓ Good |
-| ESM-first with type: module | Modern default, CJS fallback via exports | ✓ Good |
+|----------|-----------|---------|
+| Web-only (drop RN) | Simpler codebase, clear target audience | Good |
+| Inline SVG | No dependencies, native browser support | Good |
+| Per-part colors | More flexible than intensity system | Good |
+| Left/right prefixes | Explicit control over bilateral muscles | Good |
+| role="button" for paths | Standard accessible interactive pattern | Good |
+| Map-based color lookup | O(1) performance vs array merging | Good |
+| ESM-first with type: module | Modern default, CJS fallback via exports | Good |
+
+### Key Decisions (v1.0.0)
+
+| Decision | Rationale | Outcome |
+|----------|-----------|---------|
+| simple-body-highlighter-react | Clearer package name for npm discovery | Pending |
+| GitHub Actions publish on tags | Automated, no manual npm publish needed | Pending |
 
 ### Technical Notes
 
-- Package: react-body-highlighter v4.0.0
+- Package: simple-body-highlighter-react v1.0.0 (target)
 - Peer deps: React 18/19
 - Build: tsup (ESM 143 KB + CJS 144 KB)
 - Tests: 24 passing (jest + @testing-library/react)
 - Body parts: 44 slugs (19 bilateral pairs, 4 centerline, 2 back-only)
 
-### Deferred to v4.1+
+### Deferred to v1.1+
 
 - CSS transitions for color changes (INTR-05)
 - Arrow key navigation between parts (INTR-06)
@@ -90,14 +96,15 @@ Archives:
 ## Session Continuity
 
 **Last session:** 2026-01-19
-**Stopped at:** v4.0 milestone complete
+**Stopped at:** Roadmap created for v1.0.0
 **Resume file:** None
 
 **Context for next session:**
-- v4.0 shipped and archived
-- Ready for `/gsd:new-milestone` to plan v4.1 or v5.0
-- Consider npm publish workflow
+- v1.0.0 roadmap ready with 2 phases
+- Phase 1: Package rename, cleanup, build verification
+- Phase 2: Git remote, docs, CI/CD
+- Ready for `/gsd:plan-phase 1`
 
 ---
 *State initialized: 2026-01-17*
-*Last updated: 2026-01-19 — v4.0 milestone complete*
+*Last updated: 2026-01-19 - v1.0.0 roadmap created*
