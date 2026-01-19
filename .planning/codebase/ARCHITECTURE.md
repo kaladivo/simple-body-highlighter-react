@@ -1,123 +1,130 @@
 # Architecture
 
-**Analysis Date:** 2026-01-17
+**Analysis Date:** 2026-01-19
 
 ## Pattern Overview
 
-**Overall:** Single-Component Library with SVG Rendering
+**Overall:** Single Component Library with Static Asset Data
 
 **Key Characteristics:**
-- Exports a single React component (`Body`) as the primary public API
-- Uses SVG paths to render human body anatomy with customizable highlighting
-- Data-driven rendering: body parts are defined as static path data, user provides highlighting configuration
-- Supports male/female variants and front/back views through composition
+- Single exported React component (`Body`) as the entire public API
+- Declarative props-based configuration (no internal state management)
+- SVG path data stored as static TypeScript constants
+- Gender and view variants handled through asset selection, not component branching
 
 ## Layers
 
-**Public API (Entry Point):**
-- Purpose: Expose the Body component and TypeScript types for consumers
-- Location: `index.tsx`
-- Contains: Main `Body` component, all exported types (`Slug`, `BodyPart`, `ExtendedBodyPart`, `BodyPartStyles`, `BodyProps`)
-- Depends on: Components, Assets, Utils
-- Used by: External consumers (npm package users)
+**Public API Layer:**
+- Purpose: Exposes the library's functionality to consumers
+- Location: `src/index.tsx`
+- Contains: Main `Body` component, type exports
+- Depends on: Components layer, Assets layer, Types
+- Used by: Consumer applications
 
-**SVG Wrapper Components:**
-- Purpose: Provide SVG containers with gender-specific viewboxes and body outlines
-- Location: `components/`
+**Components Layer:**
+- Purpose: SVG wrapper components that handle viewBox and outline rendering
+- Location: `src/components/`
 - Contains: `SvgMaleWrapper.tsx`, `SvgFemaleWrapper.tsx`
-- Depends on: `react-native-svg`
-- Used by: Main `Body` component in `index.tsx`
+- Depends on: React
+- Used by: Main Body component
 
-**Body Part Assets:**
-- Purpose: Store SVG path definitions for each body part (muscle group)
-- Location: `assets/`
+**Assets Layer:**
+- Purpose: Static SVG path data for all body parts
+- Location: `src/assets/`
 - Contains: `bodyFront.ts`, `bodyBack.ts`, `bodyFemaleFront.ts`, `bodyFemaleBack.ts`
-- Depends on: Type definitions from `index.tsx`
-- Used by: Main `Body` component
+- Depends on: Types (BodyPartSlug)
+- Used by: Main Body component
 
-**Utilities:**
-- Purpose: Provide helper functions for data manipulation
-- Location: `utils/`
-- Contains: `differenceWith.ts` (array comparison utility)
-- Depends on: Nothing
-- Used by: Main `Body` component (note: imported but not actively used in current code)
+**Types Layer:**
+- Purpose: TypeScript type definitions for the entire library
+- Location: `src/types.ts`
+- Contains: `BodyPartSlug`, `BodyPartData`, `ModelProps`
+- Depends on: React (for event types)
+- Used by: All other layers
 
 ## Data Flow
 
 **Rendering Flow:**
 
-1. Consumer passes `data` array with body part slugs and styling (intensity/color/styles)
-2. `Body` component selects appropriate body asset based on `gender` and `side` props
-3. Asset body parts are merged with user-provided data via `mergedBodyParts()` callback
-4. For each body part, SVG `Path` elements are rendered with computed fill/stroke styles
-5. `SvgMaleWrapper` or `SvgFemaleWrapper` wraps all paths in an SVG container
+1. Consumer passes `data` array (BodyPartData[]) with slug/color pairs to Body component
+2. Body component creates a Map for O(1) color lookup from data
+3. Based on `gender` and `side` props, appropriate asset array is selected
+4. Each body part in assets is rendered as SVG path(s) with computed fill color
+5. SVG wrapper (male/female) provides viewBox and optional border outline
 
-**Color Resolution Priority:**
-1. Per-part `styles.fill` (highest priority)
-2. Per-part `color` prop
-3. Intensity-based color from `colors` array
-4. `defaultFill` prop (lowest priority)
+**Color Resolution:**
+
+1. Check if part is in `disabledParts` array -> return disabled gray (#EBEBE4)
+2. Check colorMap for explicit color from `data` prop -> return that color
+3. Fall back to `defaultFill` prop (default: #3f3f3f)
+
+**Click Handling:**
+
+1. User clicks/taps on SVG path element
+2. If part is disabled, no handler is attached -> click ignored
+3. If enabled, `onClick(slug, event)` callback is invoked
+4. Consumer handles state update (e.g., toggling highlight)
 
 **State Management:**
-- No internal state - component is fully controlled via props
-- All style computation happens during render via `useCallback` memoization
+- The component is stateless - all state lives in the consumer
+- Color state managed via `useMemo` for performance (colorMap)
+- No internal state for selection, highlighting, etc.
 
 ## Key Abstractions
 
-**BodyPart:**
-- Purpose: Represents a single body part with its SVG path data
-- Examples: `assets/bodyFront.ts` contains array of `BodyPart` objects
-- Pattern: Static data structure with `slug`, `color`, and `path` (with `common`, `left`, `right` sub-paths)
+**BodyPartSlug:**
+- Purpose: Type-safe identifier for all 44 body parts
+- Examples: `"left-biceps"`, `"abs"`, `"right-neck"`
+- Pattern: Union type of string literals
 
-**ExtendedBodyPart:**
-- Purpose: Extended body part with user-provided styling and side selection
-- Examples: Passed via `data` prop to `Body` component
-- Pattern: Extends `BodyPart` with `intensity`, `side`, and `styles` properties
-
-**Slug:**
-- Purpose: Type-safe identifier for body parts (muscles)
-- Examples: `"chest"`, `"biceps"`, `"quadriceps"`, etc.
-- Pattern: Union type of all valid body part identifiers
+**BodyPartAsset:**
+- Purpose: Connects a slug to its SVG path data
+- Examples: `src/assets/bodyFront.ts` entries
+- Pattern: Object with `slug: BodyPartSlug` and `pathData: string[]`
 
 **SvgWrapper:**
-- Purpose: Gender-specific SVG container with viewBox and border outline
-- Examples: `components/SvgMaleWrapper.tsx`, `components/SvgFemaleWrapper.tsx`
-- Pattern: React FC accepting `children`, `scale`, `side`, `border` props
+- Purpose: Encapsulates gender-specific viewBox and outline SVG
+- Examples: `src/components/SvgMaleWrapper.tsx`, `src/components/SvgFemaleWrapper.tsx`
+- Pattern: React FC receiving children (body part paths) and view configuration
 
 ## Entry Points
 
-**Package Entry (`index.tsx`):**
-- Location: `/Users/kaladivo/workspace/funCoding/react-native-body-highlighter/index.tsx`
-- Triggers: Imported by consuming applications
-- Responsibilities: Export `Body` component (default) and all TypeScript types
+**Library Entry (npm package):**
+- Location: `src/index.tsx`
+- Triggers: `import { Body } from 'react-body-highlighter'`
+- Responsibilities: Export Body component and all public types
 
-**Build Output (`dist/index.js`):**
-- Location: `dist/index.js` (generated)
-- Triggers: `npm publish` or consumer imports
-- Responsibilities: Compiled JS entry point for npm package
+**Build Entry:**
+- Location: `src/index.tsx` (via tsup)
+- Triggers: `npm run build`
+- Responsibilities: Bundle to ESM and CJS formats in `dist/`
+
+**Demo Entry:**
+- Location: `demo/main.tsx`
+- Triggers: Vite dev server
+- Responsibilities: Render interactive demo application
 
 ## Error Handling
 
-**Strategy:** Silent fallbacks with sensible defaults
+**Strategy:** Fail-safe defaults, no runtime errors
 
 **Patterns:**
-- Missing body part data falls back to `defaultFill` color
-- Disabled parts (`disabledParts` prop) render with gray `#EBEBE4` fill
-- Hidden parts (`hiddenParts` prop) are filtered out entirely
-- Optional chaining used throughout (`onBodyPartPress?.()`)
+- Missing `data` prop defaults to empty array
+- Unknown slugs in `data` are silently ignored (no matching asset)
+- Missing `onClick` prop is safely handled via optional chaining
+- Invalid colors pass through to SVG (browser handles)
 
 ## Cross-Cutting Concerns
 
-**Logging:** None - library does not log
-
-**Validation:** TypeScript compile-time type checking only; no runtime validation
-
-**Authentication:** Not applicable - UI component library
-
-**Accessibility:**
-- SVG elements have `accessible={true}` and `accessibilityLabel` props
-- Body parts have `aria-disabled` attribute when in `disabledParts`
+**Logging:** None - library has no logging
+**Validation:** None at runtime - TypeScript provides compile-time safety
+**Accessibility:** Built into component via ARIA attributes on SVG paths:
+  - `role="button"` on interactive paths
+  - `aria-label` with human-readable body part name
+  - `tabIndex` for keyboard navigation
+  - `aria-disabled` for disabled parts
+  - Keyboard handlers for Enter/Space activation
 
 ---
 
-*Architecture analysis: 2026-01-17*
+*Architecture analysis: 2026-01-19*

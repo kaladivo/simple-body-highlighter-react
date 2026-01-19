@@ -1,66 +1,68 @@
 # External Integrations
 
-**Analysis Date:** 2026-01-17
+**Analysis Date:** 2026-01-19
 
 ## APIs & External Services
 
-**None.**
-
-This is a standalone UI component library. It does not integrate with any external APIs, backend services, or third-party services.
+**None:**
+- This is a standalone React component library
+- No external API calls or SDK integrations
+- All body part SVG data is bundled inline
 
 ## Data Storage
 
 **Databases:**
-- None - This is a pure UI component with no persistence
+- None - Pure UI component, no data persistence
 
 **File Storage:**
-- None - No file I/O operations
+- None - No file operations
 
 **Caching:**
-- None - Component renders from props only
+- None - React component state only
 
 ## Authentication & Identity
 
 **Auth Provider:**
-- Not applicable - UI component library
+- None - No authentication required
+- Component receives data via props
 
 ## Monitoring & Observability
 
 **Error Tracking:**
-- None - No error reporting integration
+- None built-in
 
 **Logs:**
-- None - No logging framework
+- None - Pure presentational component
 
 ## CI/CD & Deployment
 
 **Hosting:**
-- npm registry (https://registry.npmjs.org)
-- Published as public package: `react-native-body-highlighter`
+- npm Registry (public package)
+- Published as `react-body-highlighter`
 
-**CI Pipeline:**
-- GitHub Actions
-- Workflow: `.github/workflows/npm-publish.yml`
-- Trigger: Git tags matching `v*` (e.g., `v3.1.4`)
+**CI Pipeline (`.github/workflows/npm-publish.yml`):**
+- Trigger: Push of version tags (`v*`)
+- Runner: ubuntu-latest
+- Node version: 18
+- Steps:
+  1. Install dependencies (yarn)
+  2. Run tests (`yarn test`)
+  3. Type check (`yarn typecheck`)
+  4. Build (`yarn build`)
+  5. Publish to npm
 
-**CI Pipeline Steps:**
-1. Checkout repository
-2. Setup Node.js 18
-3. Cache Yarn dependencies
-4. Install dependencies (`yarn install --frozen-lockfile`)
-5. Run tests (`yarn test`)
-6. Type check (`yarn typecheck`)
-7. Build package (`yarn build`)
-8. Publish to npm
+**Required Secrets:**
+- `NPM_AUTH_TOKEN` - npm publish authentication
 
 ## Environment Configuration
 
-**Required env vars (CI only):**
-- `NPM_AUTH_TOKEN` - GitHub secret for npm publish authentication
+**Required env vars:**
+- None for library usage
+- `NPM_AUTH_TOKEN` for CI publishing only
 
 **Secrets location:**
 - GitHub repository secrets (for CI)
-- No runtime secrets required
+- No `.env` files in project
 
 ## Webhooks & Callbacks
 
@@ -70,61 +72,31 @@ This is a standalone UI component library. It does not integrate with any extern
 **Outgoing:**
 - None
 
-## Third-Party Libraries
-
-**Runtime Dependency:**
-
-| Package | Purpose | Integration Type |
-|---------|---------|------------------|
-| `react-native-svg` | SVG rendering (Svg, G, Path components) | Direct import |
-
-**Usage in code:**
-```typescript
-// components/SvgMaleWrapper.tsx, components/SvgFemaleWrapper.tsx
-import Svg, { G, Path } from "react-native-svg";
-
-// index.tsx
-import { Path } from "react-native-svg";
-```
-
-**Peer Dependencies (Consumer Responsibility):**
-
-| Package | Purpose |
-|---------|---------|
-| `react` | React component framework |
-| `react-native` | Mobile platform APIs |
-
-## Platform Compatibility
-
-**React Native:**
-- Compatible with React Native (tested with ^0.82.1)
-- No native module linking required
-
-**Expo:**
-- Fully compatible (mentioned in README)
-- Works with Expo's managed workflow
-
 ## Package Distribution
 
 **npm Package:**
-- Name: `react-native-body-highlighter`
-- Registry: https://www.npmjs.com/package/react-native-body-highlighter
+- Name: `react-body-highlighter`
+- Version: 4.0.0
 - Access: Public
+- Registry: https://registry.npmjs.org
 
-**Installation:**
-```bash
-npm install react-native-body-highlighter
-# or
-yarn add react-native-body-highlighter
-```
+**Published Files:**
+- `dist/` - Bundled library (ESM, CJS, types)
+- `README.md` - Documentation
+- `LICENSE` - MIT license
 
-**Consumer also needs:**
-```bash
-npm install react-native-svg
-# or
-yarn add react-native-svg
-```
+**Package Size:**
+- ESM: ~145KB (includes all SVG path data)
+- CJS: ~147KB
+- Total with sourcemaps: ~620KB
+
+## Third-Party Dependencies at Runtime
+
+**None:**
+- Zero runtime dependencies
+- Only peer dependencies: React, React DOM
+- All SVG assets bundled inline as TypeScript constants
 
 ---
 
-*Integration audit: 2026-01-17*
+*Integration audit: 2026-01-19*

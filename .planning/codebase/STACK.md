@@ -1,123 +1,117 @@
 # Technology Stack
 
-**Analysis Date:** 2026-01-17
+**Analysis Date:** 2026-01-19
 
 ## Languages
 
 **Primary:**
-- TypeScript 5.6.3 - All source code (`index.tsx`, `components/*.tsx`, `utils/*.ts`, `assets/*.ts`)
+- TypeScript 5.6.3 - All source code (`src/**/*.ts`, `src/**/*.tsx`)
 
 **Secondary:**
-- JavaScript - Configuration files only (`babel.config.js`, `jest.config.js`, `rn-cli.config.js`)
+- JavaScript (ES Module) - Configuration files (`jest.config.js`, `babel.config.js`)
 
 ## Runtime
 
 **Environment:**
-- Node.js 18 (specified in CI workflow)
-- React Native runtime (consumer app provides this)
+- Node.js 18+ (CI uses Node 18, peer deps support React 18/19)
+- Browser (React DOM target)
 
 **Package Manager:**
-- Yarn 1.22.22 (classic)
-- Lockfile: `yarn.lock` (present, 213KB)
+- Yarn 1.22.22 (Classic)
+- Lockfile: `package-lock.json` present (npm lockfile, not yarn.lock)
 
 ## Frameworks
 
 **Core:**
-- React Native ^0.82.1 (peer dependency) - Mobile UI framework
-- React ^19.2.0 (peer dependency) - UI component library
+- React 18/19 - Peer dependency, component library target
+- React DOM 18/19 - Peer dependency for web rendering
 
 **Testing:**
 - Jest 29.7.0 - Test runner
-- @testing-library/react-native 13.3.3 - Component testing utilities
-- @testing-library/jest-native 5.4.3 - Jest matchers for React Native
+- Testing Library React 16.3.1 - Component testing utilities
+- Testing Library Jest DOM 6.9.1 - DOM matchers
 
 **Build/Dev:**
-- TypeScript 5.6.3 - Type checking and compilation
-- Babel (via @react-native/babel-preset ^0.82.1) - JavaScript transpilation
-- Prettier 3.6.2 - Code formatting
+- tsup 8.4.0 - TypeScript bundler (ESM + CJS output)
+- Vite 7.3.1 - Development server for demo
+- Babel 7.28.5 - Jest transpilation
 
 ## Key Dependencies
 
-**Critical (Runtime):**
-- `react-native-svg` ^15.9.0 - SVG rendering for body part paths (only direct dependency)
+**Critical:**
+- React 18/19 (peer) - Required for component usage
+- React DOM 18/19 (peer) - Required for SVG rendering
 
-**Peer Dependencies (Consumer Provides):**
-- `react` * - Any version
-- `react-native` * - Any version
+**Development Only:**
+- `@vitejs/plugin-react` 5.1.2 - Vite React plugin for demo
+- `prettier` 3.6.2 - Code formatting
+- `react-test-renderer` 19.2.0 - React testing utilities
 
-**Development:**
-- `@types/react` ^18.3.12 - React type definitions
-- `@types/react-native` ^0.73.0 - React Native type definitions
-- `react-test-renderer` ^19.2.0 - React component rendering for tests
+**Zero Runtime Dependencies:**
+- This library has NO runtime dependencies beyond React peer deps
+- All SVG path data is bundled inline in the library
 
 ## Configuration
 
 **TypeScript (`tsconfig.json`):**
-```json
-{
-  "compilerOptions": {
-    "target": "es6",
-    "module": "commonjs",
-    "jsx": "react-native",
-    "strict": true,
-    "esModuleInterop": true,
-    "outDir": "./dist",
-    "declaration": true
-  },
-  "exclude": ["__tests__", "node_modules", "dist"]
-}
-```
+- Target: ES2020
+- Module: ESNext with bundler resolution
+- JSX: react-jsx (automatic runtime)
+- Strict mode enabled
+- Output: `./dist`
 
-**Babel (`babel.config.js`):**
-- Uses `module:@react-native/babel-preset`
+**Build (`tsup.config.ts`):**
+- Entry: `src/index.tsx`
+- Formats: ESM (`.js`) + CJS (`.cjs`)
+- Type declarations: `.d.ts` and `.d.cts`
+- Sourcemaps enabled
+- React externalized (not bundled)
 
-**Jest (`jest.config.js`):**
-- Preset: `react-native`
-- Transforms `react-native-svg` and `@react-native(-community)?` packages
+**Testing (`jest.config.js`):**
+- Environment: jsdom
+- Transform: babel-jest for TypeScript
+- Test pattern: `__tests__/**/*.test.{ts,tsx}`
 
-**Metro/RN CLI (`rn-cli.config.js`):**
-- Uses `react-native-typescript-transformer`
-- Source extensions: `.ts`, `.tsx`
-
-## Build Output
-
-**Distribution:**
-- Output directory: `dist/`
-- Main entry: `dist/index.js`
-- Type definitions: `dist/index.d.ts`
-- Published files: `dist/`, `README.md`, `LICENSE`
-
-**Build Command:**
-```bash
-yarn build    # Runs tsc
-```
+**Demo (`vite.config.ts`):**
+- Port: 5173 with auto-open
+- Uses `index.html` at root with `demo/main.tsx`
 
 ## Platform Requirements
 
 **Development:**
 - Node.js 18+
-- Yarn 1.x (classic)
-- No native dependencies to build
-
-**Consumer Requirements:**
-- React Native project with `react-native-svg` installed
-- Expo compatible (no native linking required)
+- Yarn 1.x (or npm)
 
 **Production:**
-- Published to npm registry
-- Package name: `react-native-body-highlighter`
-- Version: 3.1.3
-- Access: Public
+- React 18.0.0+ or 19.0.0+
+- React DOM 18.0.0+ or 19.0.0+
+- Modern browser with SVG support
+
+**Package Exports:**
+```json
+{
+  ".": {
+    "import": { "types": "./dist/index.d.ts", "default": "./dist/index.js" },
+    "require": { "types": "./dist/index.d.cts", "default": "./dist/index.cjs" }
+  }
+}
+```
 
 ## Scripts
 
 | Script | Command | Purpose |
 |--------|---------|---------|
-| `build` | `tsc` | Compile TypeScript to JavaScript |
+| `build` | `tsup` | Build library to `dist/` |
+| `dev` | `tsup --watch` | Watch mode for library |
 | `test` | `jest` | Run test suite |
-| `prepare` | `yarn build` | Build before publish (npm lifecycle) |
-| `typecheck` | `tsc --noEmit` | Type check without emitting |
+| `typecheck` | `tsc --noEmit` | Type checking without emit |
+
+**Demo (via Vite):**
+```bash
+npx vite        # Start demo dev server
+npx vite build  # Build demo (not typical workflow)
+```
 
 ---
 
-*Stack analysis: 2026-01-17*
+*Stack analysis: 2026-01-19*

@@ -1,157 +1,160 @@
 # Codebase Structure
 
-**Analysis Date:** 2026-01-17
+**Analysis Date:** 2026-01-19
 
 ## Directory Layout
 
 ```
 react-native-body-highlighter/
-├── index.tsx           # Main component and type exports (package entry)
-├── components/         # SVG wrapper components
-├── assets/             # Body part SVG path data
-├── utils/              # Helper utilities
-├── __tests__/          # Jest test files
-├── docs/               # Documentation assets
-│   └── screenshots/    # README screenshots
-├── dist/               # Build output (generated, gitignored)
-├── .github/            # GitHub workflows
-│   └── workflows/
-├── .planning/          # Planning documentation
-│   └── codebase/       # Architecture docs (this file)
-├── package.json        # Package manifest
-├── tsconfig.json       # TypeScript configuration
-├── jest.config.js      # Jest configuration
-├── babel.config.js     # Babel configuration
-└── README.md           # Package documentation
+├── src/                    # Source code (library)
+│   ├── index.tsx          # Main entry point, Body component
+│   ├── types.ts           # TypeScript type definitions
+│   ├── components/        # SVG wrapper components
+│   │   ├── SvgMaleWrapper.tsx
+│   │   └── SvgFemaleWrapper.tsx
+│   └── assets/            # SVG path data for body parts
+│       ├── bodyFront.ts
+│       ├── bodyBack.ts
+│       ├── bodyFemaleFront.ts
+│       └── bodyFemaleBack.ts
+├── __tests__/             # Jest test files
+│   └── Body.test.tsx
+├── demo/                  # Vite demo application
+│   ├── index.html
+│   └── main.tsx
+├── dist/                  # Build output (generated)
+├── docs/                  # Documentation assets
+│   └── screenshots/
+├── .planning/             # GSD planning documents
+│   ├── codebase/         # Codebase analysis (this file)
+│   ├── phases/           # Implementation phases
+│   ├── milestones/       # Milestone definitions
+│   └── research/         # Research notes
+├── package.json           # npm package config
+├── tsconfig.json          # TypeScript config
+├── tsup.config.ts         # Build tool config
+├── vite.config.ts         # Demo dev server config
+├── jest.config.js         # Test config
+└── babel.config.js        # Babel config for Jest
 ```
 
 ## Directory Purposes
 
-**`/` (Root):**
-- Purpose: Package entry point and configuration files
-- Contains: Main `index.tsx` component, all config files
-- Key files: `index.tsx`, `package.json`, `tsconfig.json`
+**src/**
+- Purpose: All library source code
+- Contains: React components, TypeScript types, SVG asset data
+- Key files: `index.tsx` (main), `types.ts` (public types)
 
-**`components/`:**
-- Purpose: SVG wrapper components for male and female body variants
-- Contains: React functional components that wrap body part paths in SVG
+**src/components/**
+- Purpose: Internal SVG wrapper components
+- Contains: Male and female body outline wrappers
 - Key files: `SvgMaleWrapper.tsx`, `SvgFemaleWrapper.tsx`
 
-**`assets/`:**
-- Purpose: Static SVG path data for body parts
-- Contains: TypeScript files exporting arrays of `BodyPart` objects
-- Key files: `bodyFront.ts`, `bodyBack.ts`, `bodyFemaleFront.ts`, `bodyFemaleBack.ts`
+**src/assets/**
+- Purpose: Static SVG path data for all body variants
+- Contains: 4 files covering male/female x front/back combinations
+- Key files: Each exports a `BodyPartAsset[]` array
 
-**`utils/`:**
-- Purpose: Generic utility functions
-- Contains: Array/data manipulation helpers
-- Key files: `differenceWith.ts`
+**__tests__/**
+- Purpose: Jest unit tests
+- Contains: Component tests using Testing Library
+- Key files: `Body.test.tsx`
 
-**`__tests__/`:**
-- Purpose: Jest test suites
-- Contains: Component tests using React Native Testing Library
-- Key files: `test.tsx`
+**demo/**
+- Purpose: Interactive demo for development and documentation
+- Contains: Vite-based React application
+- Key files: `main.tsx` (renders demo UI)
 
-**`dist/`:**
-- Purpose: TypeScript build output
-- Contains: Compiled JS and type declarations
-- Generated: Yes (by `yarn build`)
-- Committed: No (gitignored)
+**dist/**
+- Purpose: Build output for npm publishing
+- Contains: ESM (.js), CJS (.cjs), TypeScript declarations (.d.ts)
+- Generated: Yes (via `npm run build`)
+- Committed: No (in .gitignore)
 
 ## Key File Locations
 
 **Entry Points:**
-- `index.tsx`: Main package entry, exports `Body` component and types
-- `dist/index.js`: Compiled entry (npm package main)
-- `dist/index.d.ts`: Type declarations
+- `src/index.tsx`: Library entry, exports Body component and types
+- `demo/main.tsx`: Demo application entry
 
 **Configuration:**
-- `package.json`: Package manifest, scripts, dependencies
+- `package.json`: Package metadata, scripts, dependencies
 - `tsconfig.json`: TypeScript compiler options
+- `tsup.config.ts`: Build configuration (ESM + CJS output)
 - `jest.config.js`: Test runner configuration
-- `babel.config.js`: Babel presets for React Native
 
 **Core Logic:**
-- `index.tsx`: All component logic, type definitions, rendering
-- `components/SvgMaleWrapper.tsx`: Male body SVG container (19KB of path data)
-- `components/SvgFemaleWrapper.tsx`: Female body SVG container (21KB of path data)
-
-**Body Part Data:**
-- `assets/bodyFront.ts`: Male front body parts (25KB)
-- `assets/bodyBack.ts`: Male back body parts (21KB)
-- `assets/bodyFemaleFront.ts`: Female front body parts (32KB)
-- `assets/bodyFemaleBack.ts`: Female back body parts (23KB)
+- `src/index.tsx`: Body component implementation (~103 lines)
+- `src/types.ts`: All public TypeScript types (~139 lines)
 
 **Testing:**
-- `__tests__/test.tsx`: Main test file for Body component
+- `__tests__/Body.test.tsx`: Comprehensive component tests (~219 lines)
 
 ## Naming Conventions
 
 **Files:**
 - Components: PascalCase with `.tsx` extension (e.g., `SvgMaleWrapper.tsx`)
+- Types: camelCase with `.ts` extension (`types.ts`)
 - Assets: camelCase with `.ts` extension (e.g., `bodyFront.ts`)
-- Utils: camelCase with `.ts` extension (e.g., `differenceWith.ts`)
-- Tests: `test.tsx` (single file approach)
-- Config: lowercase with appropriate extension (e.g., `jest.config.js`)
+- Tests: ComponentName.test.tsx (e.g., `Body.test.tsx`)
 
 **Directories:**
-- lowercase, no hyphens for source dirs (e.g., `components`, `assets`, `utils`)
-- Double underscores for special dirs (e.g., `__tests__`)
+- All lowercase, singular (e.g., `component`, `asset`)
+- Exception: `__tests__` follows Jest convention
 
 **Exports:**
-- Default export for main component (`Body`)
-- Named exports for types (`Slug`, `BodyPart`, `ExtendedBodyPart`, `BodyProps`, `BodyPartStyles`)
-- Named exports for assets (`bodyFront`, `bodyBack`, etc.)
+- Components: Named exports in PascalCase (`export { Body }`)
+- Types: Named exports in PascalCase (`export type { BodyPartSlug }`)
+- Default export: Also provided for Body (`export default Body`)
 
 ## Where to Add New Code
 
 **New Body Part:**
-1. Add path data to relevant asset files in `assets/`
-2. Add slug to `Slug` union type in `index.tsx`
-3. Add tests in `__tests__/test.tsx`
+1. Add slug to `src/types.ts` BodyPartSlug union
+2. Add SVG path data to relevant `src/assets/*.ts` files
+3. Test renders correctly in demo
 
-**New Component Variant (e.g., child body):**
-1. Create new wrapper in `components/` (e.g., `SvgChildWrapper.tsx`)
-2. Create new asset files in `assets/` (e.g., `bodyChildFront.ts`)
-3. Update `index.tsx` to handle new variant via new prop
+**New Component Prop:**
+1. Add to `ModelProps` interface in `src/types.ts`
+2. Implement in `src/index.tsx` Body component
+3. Add tests to `__tests__/Body.test.tsx`
+
+**New SVG Wrapper (e.g., for new gender/body type):**
+1. Create `src/components/SvgNewWrapper.tsx`
+2. Add asset files `src/assets/bodyNewFront.ts`, etc.
+3. Update Body component to handle new variant
 
 **New Utility Function:**
-- Add to `utils/` directory with `.ts` extension
-- Import in `index.tsx` if needed by main component
+1. Create `src/utils/` directory if needed
+2. Add function file (e.g., `src/utils/colorHelpers.ts`)
+3. Import in `src/index.tsx`
 
-**New Tests:**
-- Add test cases to existing `__tests__/test.tsx`
-- Follow existing `describe`/`it` structure
-
-**New Props/Features:**
-1. Update `BodyProps` type in `index.tsx`
-2. Implement in `Body` component
-3. Add tests for new functionality
-4. Update README.md with new prop documentation
+**New Test Suite:**
+1. Add to `__tests__/` directory
+2. Follow pattern: `FeatureName.test.tsx`
 
 ## Special Directories
 
-**`dist/`:**
-- Purpose: TypeScript compilation output
-- Generated: Yes (via `yarn build`)
-- Committed: No
-- Consumers: npm package users
-
-**`node_modules/`:**
-- Purpose: Installed dependencies
-- Generated: Yes (via `yarn install`)
-- Committed: No
-
-**`.github/workflows/`:**
-- Purpose: CI/CD automation
-- Generated: No
+**.planning/**
+- Purpose: GSD project planning and codebase analysis
+- Generated: No (manually maintained)
 - Committed: Yes
 
-**`docs/screenshots/`:**
-- Purpose: README documentation images
-- Generated: No
+**dist/**
+- Purpose: npm package build output
+- Generated: Yes (via tsup)
+- Committed: No
+
+**node_modules/**
+- Purpose: npm dependencies
+- Generated: Yes (via npm install)
+- Committed: No
+
+**docs/screenshots/**
+- Purpose: README images and documentation assets
+- Generated: No (manually added)
 - Committed: Yes
 
 ---
 
-*Structure analysis: 2026-01-17*
+*Structure analysis: 2026-01-19*
