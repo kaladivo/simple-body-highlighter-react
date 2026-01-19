@@ -19,6 +19,11 @@ Rename package from react-body-highlighter to simple-body-highlighter-react, cle
 
 **Dependencies:** None (first phase)
 
+**Plans:** 1 plan
+
+Plans:
+- [ ] 01-01-PLAN.md — Rename package, update references, cleanup, verify build
+
 **Requirements:**
 - REN-01: Update package.json name to `simple-body-highlighter-react`
 - REN-02: Update package.json version to `1.0.0`
@@ -69,7 +74,7 @@ Rename package from react-body-highlighter to simple-body-highlighter-react, cle
 
 | Phase | Name | Requirements | Status |
 |-------|------|--------------|--------|
-| 1 | Package Identity and Build Verification | 9 | Pending |
+| 1 | Package Identity and Build Verification | 9 | Planned |
 | 2 | Remote, Documentation, and CI/CD | 10 | Pending |
 
 **Total:** 19 requirements mapped, 0 complete
@@ -95,4 +100,4 @@ Orphaned: 0
 
 ---
 *Roadmap created: 2026-01-19*
-*Last updated: 2026-01-19*
+*Last updated: 2026-01-19 - Phase 1 planned*
