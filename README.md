@@ -113,20 +113,7 @@ Key changes:
 
 ## Publishing (Maintainers)
 
-Releases are automated via GitHub Actions. Pushing a version tag triggers npm publish.
-
-### Setup (one-time)
-
-1. Create npm granular access token at https://npmjs.com/settings/~/tokens:
-   - Token name: `github-actions-publish`
-   - Expiration: 90 days (max for write tokens)
-   - Permissions: Read and write
-   - Packages: Only `simple-body-highlighter-react`
-
-2. Add token as GitHub secret:
-   - Go to repository Settings > Secrets and variables > Actions
-   - Create secret named `NPM_TOKEN`
-   - Paste the token value
+Releases are automated via GitHub Actions using [npm trusted publishers](https://docs.npmjs.com/generating-provenance-statements) (OIDC). No secrets needed — GitHub Actions authenticates directly with npm.
 
 ### Release workflow
 
