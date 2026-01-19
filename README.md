@@ -113,12 +113,7 @@ Key changes:
 
 ## Publishing (Maintainers)
 
-Releases are automated via GitHub Actions with [provenance attestation](https://docs.npmjs.com/generating-provenance-statements).
-
-### Setup (one-time)
-
-1. Create npm access token at https://npmjs.com/settings/~/tokens
-2. Add as GitHub secret `NPM_TOKEN` at repository Settings > Secrets > Actions
+Releases are automated via GitHub Actions with [provenance attestation](https://docs.npmjs.com/generating-provenance-statements) using OIDC (no secrets needed).
 
 ### Release workflow
 
