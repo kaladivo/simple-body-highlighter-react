@@ -22,7 +22,7 @@ Rename package from react-body-highlighter to simple-body-highlighter-react, cle
 **Plans:** 1 plan
 
 Plans:
-- [x] 01-01-PLAN.md — Rename package, update references, cleanup, verify build ✓
+- [x] 01-01-PLAN.md — Rename package, update references, cleanup, verify build
 
 **Requirements:**
 - REN-01: Update package.json name to `simple-body-highlighter-react`
@@ -49,6 +49,12 @@ Plans:
 
 **Dependencies:** Phase 1 (package must be renamed and building before publishing)
 
+**Plans:** 2 plans
+
+Plans:
+- [ ] 02-01-PLAN.md — Update GitHub Actions workflow and add CI/CD docs to README
+- [ ] 02-02-PLAN.md — Create GitHub remote, push codebase, verify publish pipeline
+
 **Requirements:**
 - GIT-01: Add new remote for kaladivo/simple-body-highlighter-react
 - GIT-02: Push codebase to new remote
@@ -74,8 +80,8 @@ Plans:
 
 | Phase | Name | Requirements | Status |
 |-------|------|--------------|--------|
-| 1 | Package Identity and Build Verification | 9 | ✓ Complete |
-| 2 | Remote, Documentation, and CI/CD | 10 | Pending |
+| 1 | Package Identity and Build Verification | 9 | Complete |
+| 2 | Remote, Documentation, and CI/CD | 10 | Planned |
 
 **Total:** 19 requirements mapped, 9 complete
 
@@ -100,4 +106,4 @@ Orphaned: 0
 
 ---
 *Roadmap created: 2026-01-19*
-*Last updated: 2026-01-19 - Phase 1 complete*
+*Last updated: 2026-01-19 - Phase 2 planned*
