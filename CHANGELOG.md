@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Interactive demo application built with Vite
+- None
 
 ### Changed
 
@@ -18,6 +18,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - None
+
+## [1.0.0] - 2026-01-19
+
+### Added
+
+- Interactive demo application built with Vite
+
+### Changed
+
+- Renamed package from `react-body-highlighter` to `simple-body-highlighter-react`
+- Reset version to 1.0.0 for new package identity
 
 ## [4.0.0] - 2026-01-19
 
@@ -63,5 +74,6 @@ Notable features added in v3.x:
 - `aria-disabled` accessibility property
 - TypeScript support with hooks
 
-[Unreleased]: https://github.com/HichamELBSI/react-native-body-highlighter/compare/v4.0.0...HEAD
+[Unreleased]: https://github.com/kaladivo/simple-body-highlighter-react/compare/v1.0.0...HEAD
+[1.0.0]: https://github.com/kaladivo/simple-body-highlighter-react/compare/v4.0.0...v1.0.0
 [4.0.0]: https://github.com/HichamELBSI/react-native-body-highlighter/releases/tag/v4.0.0

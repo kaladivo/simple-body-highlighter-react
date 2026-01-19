@@ -1,6 +1,6 @@
 # Body Part Slugs
 
-Complete alphabetical list of all 44 body part slugs available in react-body-highlighter.
+Complete alphabetical list of all 44 body part slugs available in simple-body-highlighter-react.
 
 ## All Slugs
 
@@ -52,7 +52,7 @@ Complete alphabetical list of all 44 body part slugs available in react-body-hig
 ## Usage
 
 ```tsx
-import { Body, BodyPartSlug } from 'react-body-highlighter';
+import { Body, BodyPartSlug } from 'simple-body-highlighter-react';
 
 const slug: BodyPartSlug = 'left-biceps';
 

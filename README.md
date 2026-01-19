@@ -1,6 +1,6 @@
-# react-body-highlighter
+# simple-body-highlighter-react
 
-[![npm](https://img.shields.io/npm/v/react-body-highlighter.svg)](https://www.npmjs.com/package/react-body-highlighter) [![Downloads](https://img.shields.io/npm/dt/react-body-highlighter.svg)](https://www.npmjs.com/package/react-body-highlighter)
+[![npm](https://img.shields.io/npm/v/simple-body-highlighter-react.svg)](https://www.npmjs.com/package/simple-body-highlighter-react) [![Downloads](https://img.shields.io/npm/dt/simple-body-highlighter-react.svg)](https://www.npmjs.com/package/simple-body-highlighter-react)
 
 > SVG body part highlighter for React web applications.
 
@@ -14,13 +14,13 @@
 ## Installation
 
 ```bash
-npm install react-body-highlighter
+npm install simple-body-highlighter-react
 ```
 
 ## Quick Start
 
 ```tsx
-import { Body } from 'react-body-highlighter';
+import { Body } from 'simple-body-highlighter-react';
 
 function App() {
   return (
@@ -39,7 +39,7 @@ function App() {
 
 ```tsx
 import { useState } from 'react';
-import { Body, BodyPartSlug } from 'react-body-highlighter';
+import { Body, BodyPartSlug } from 'simple-body-highlighter-react';
 
 function App() {
   const [selected, setSelected] = useState<BodyPartSlug[]>([]);
@@ -94,7 +94,7 @@ Bilateral muscles use `left-` and `right-` prefixes (e.g., `left-biceps`, `right
 All types are exported for TypeScript users:
 
 ```tsx
-import type { BodyPartSlug, BodyPartData, ModelProps } from 'react-body-highlighter';
+import type { BodyPartSlug, BodyPartData, ModelProps } from 'simple-body-highlighter-react';
 ```
 
 ## Accessibility
@@ -106,7 +106,7 @@ Body parts have ARIA labels and keyboard navigation (Tab + Enter/Space).
 This is a web-only rewrite of the original `react-native-body-highlighter`. For React Native, use v3.x.
 
 Key changes:
-- Package renamed from `react-native-body-highlighter` to `react-body-highlighter`
+- Package renamed from `react-native-body-highlighter` to `simple-body-highlighter-react`
 - `onClick` replaces `onBodyPartPress`
 - `data` items require `{ slug, color }` (no more `intensity` or `side` properties)
 - Bilateral muscles now use `left-`/`right-` prefixes in the slug

@@ -38,7 +38,7 @@ function App() {
 
   return (
     <div style={{ fontFamily: 'system-ui, sans-serif', padding: '20px', maxWidth: '1200px', margin: '0 auto' }}>
-      <h1 style={{ marginBottom: '10px' }}>react-body-highlighter Demo</h1>
+      <h1 style={{ marginBottom: '10px' }}>simple-body-highlighter-react Demo</h1>
       <p style={{ color: '#666', marginBottom: '20px' }}>Click on body parts to highlight them. Click again to remove.</p>
 
       <div style={{ display: 'flex', gap: '40px', flexWrap: 'wrap' }}>
@@ -180,7 +180,7 @@ function App() {
       <div style={{ marginTop: '30px', padding: '20px', background: '#2d3436', borderRadius: '12px', color: '#dfe6e9' }}>
         <h3 style={{ marginTop: 0, color: '#fff' }}>Usage Example</h3>
         <pre style={{ margin: 0, overflow: 'auto' }}>
-{`import { Body } from 'react-body-highlighter';
+{`import { Body } from 'simple-body-highlighter-react';
 
 <Body
   data={${JSON.stringify(data.slice(0, 3), null, 2)}}
