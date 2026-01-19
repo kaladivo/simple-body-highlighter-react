@@ -6,7 +6,7 @@ See: .planning/PROJECT.md (updated 2026-01-19)
 
 **Core value:** Display and interact with body parts visually -- highlight muscle groups with per-part colors and handle user selection
 
-**Current focus:** v1.0.0 npm publish milestone
+**Current focus:** v1.0.0 milestone complete
 
 ---
 
@@ -14,17 +14,17 @@ See: .planning/PROJECT.md (updated 2026-01-19)
 
 **Milestone:** v1.0.0 Publish to npm
 **Phase:** 2 - Remote, Documentation, and CI/CD
-**Plan:** 01 complete
-**Status:** In progress
+**Plan:** All complete
+**Status:** Milestone complete
 
 **Progress:**
 ```
 Phase 1: [##########] 100% (9/9 requirements)
-Phase 2: [##        ] 20% (2/10 requirements)
-v1.0.0:  [#####     ] 58% (11/19 requirements)
+Phase 2: [##########] 100% (10/10 requirements)
+v1.0.0:  [##########] 100% (19/19 requirements)
 ```
 
-**Next Action:** Execute 02-02-PLAN.md (GitHub remote setup)
+**Next Action:** `/gsd:audit-milestone` or `/gsd:complete-milestone`
 
 ---
 
@@ -32,11 +32,11 @@ v1.0.0:  [#####     ] 58% (11/19 requirements)
 
 | Metric | Value |
 |--------|-------|
-| Session count | 2 |
-| Plans completed | 2 |
-| Requirements done | 11/19 |
-| Phases complete | 1/2 |
-| Milestone | v1.0.0 in progress |
+| Session count | 3 |
+| Plans completed | 3 |
+| Requirements done | 19/19 |
+| Phases complete | 2/2 |
+| Milestone | v1.0.0 complete |
 
 ---
 
@@ -48,7 +48,7 @@ Goal: Rename to simple-body-highlighter-react, clean react-native remnants, publ
 
 Phases:
 1. Package Identity and Build Verification (9 requirements) - COMPLETE
-2. Remote, Documentation, and CI/CD (10 requirements) - IN PROGRESS
+2. Remote, Documentation, and CI/CD (10 requirements) - COMPLETE
 
 Prior milestone: v4.0 Web Migration (shipped 2026-01-19)
 
@@ -74,20 +74,22 @@ Prior milestone: v4.0 Web Migration (shipped 2026-01-19)
 |----------|-----------|---------|
 | simple-body-highlighter-react | Clearer package name for npm discovery | Done |
 | Version reset to 1.0.0 | Fresh identity for new package | Done |
-| GitHub links to kaladivo/simple-body-highlighter-react | Phase 2 will create this repo | Pending |
-| GitHub Actions publish on tags | Automated, no manual npm publish needed | Workflow ready |
-| Granular tokens over OIDC | Node 20 compatibility | Done |
+| GitHub repo kaladivo/simple-body-highlighter-react | New home for renamed package | Done |
+| OIDC publishing (no NPM_TOKEN) | More secure, no secrets to rotate | Done |
+| Provenance attestation | Supply chain security | Done |
 | npm over yarn in CI | Consistency with package-lock.json | Done |
+| Node 24 in CI | Required for OIDC compatibility | Done |
 
 ### Technical Notes
 
-- Package: simple-body-highlighter-react v1.0.0 (DONE)
+- Package: simple-body-highlighter-react v1.0.6 (live on npm)
 - Peer deps: React 18/19
-- Build: tsup (ESM 142 KB + CJS 143 KB) - verified
-- Tests: 24 passing (jest + @testing-library/react) - verified
+- Build: tsup (ESM 145 KB + CJS 147 KB)
+- Tests: 24 passing (jest + @testing-library/react)
 - Body parts: 44 slugs (19 bilateral pairs, 4 centerline, 2 back-only)
-- React Native artifacts: all removed (rn-cli.config.js deleted)
-- CI/CD: GitHub Actions v6 workflow ready (publish.yml)
+- CI/CD: GitHub Actions with OIDC publishing and provenance
+- npm: https://www.npmjs.com/package/simple-body-highlighter-react
+- GitHub: https://github.com/kaladivo/simple-body-highlighter-react
 
 ### Deferred to v1.1+
 
@@ -102,15 +104,14 @@ Prior milestone: v4.0 Web Migration (shipped 2026-01-19)
 ## Session Continuity
 
 **Last session:** 2026-01-19
-**Stopped at:** Completed 02-01-PLAN.md (CI/CD Workflow and Documentation)
+**Stopped at:** Milestone v1.0.0 complete
 **Resume file:** None
 
 **Context for next session:**
-- Phase 2 Plan 1 complete: workflow updated, README documented
-- Next: 02-02 to create GitHub remote and push
-- NPM_TOKEN secret needs to be added to repo after creation
-- Ready for `/gsd:execute-phase 02-02`
+- Milestone complete: package renamed, published to npm with OIDC
+- Package live at v1.0.6 (versions 1.0.1-1.0.5 were OIDC debugging iterations)
+- Ready for `/gsd:audit-milestone` or `/gsd:complete-milestone`
 
 ---
 *State initialized: 2026-01-17*
-*Last updated: 2026-01-19 - Phase 2 Plan 01 complete*
+*Last updated: 2026-01-19 - Milestone v1.0.0 complete*
