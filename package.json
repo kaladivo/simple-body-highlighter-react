@@ -21,6 +21,14 @@
   "sideEffects": false,
   "author": "HichamELBSI",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kaladivo/simple-body-highlighter-react.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kaladivo/simple-body-highlighter-react/issues"
+  },
+  "homepage": "https://github.com/kaladivo/simple-body-highlighter-react#readme",
   "keywords": [
     "react",
     "body",
