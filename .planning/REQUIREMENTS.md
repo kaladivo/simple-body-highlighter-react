@@ -1,11 +1,56 @@
-# Requirements: react-body-highlighter
+# Requirements: simple-body-highlighter-react
 
-**Defined:** 2026-01-17
+**Defined:** 2026-01-17 (v4.0 migration), updated 2026-01-19 (v1.0.0 publish)
 **Core Value:** Display and interact with body parts visually -- highlight muscle groups with per-part colors and handle user selection
 
-## v1 Requirements
+---
 
-Requirements for web migration. Each maps to roadmap phases.
+## v1.0.0 Requirements (Current Milestone)
+
+Requirements for npm publishing under new package name.
+
+### Package Rename
+
+- [ ] **REN-01**: Update package.json name to `simple-body-highlighter-react`
+- [ ] **REN-02**: Update package.json version to `1.0.0`
+- [ ] **REN-03**: Update all internal references to old package name
+
+### Cleanup
+
+- [ ] **CLN-01**: Remove any react-native specific files
+- [ ] **CLN-02**: Remove react-native references from code/comments
+- [ ] **CLN-03**: Verify no react-native dependencies remain in package.json
+
+### Build Verification
+
+- [ ] **BLD-01**: Confirm build outputs ESM + CJS correctly
+- [ ] **BLD-02**: Verify TypeScript declarations generate
+- [ ] **BLD-03**: Ensure all tests pass
+
+### Git/Remote
+
+- [ ] **GIT-01**: Add new remote for kaladivo/simple-body-highlighter-react
+- [ ] **GIT-02**: Push codebase to new remote
+
+### Documentation
+
+- [ ] **DOC-04**: README with installation instructions
+- [ ] **DOC-05**: README with basic usage examples
+- [ ] **DOC-06**: README with props documentation
+- [ ] **DOC-07**: README with body parts reference link
+
+### CI/CD
+
+- [ ] **CI-01**: GitHub Actions workflow file (.github/workflows/publish.yml)
+- [ ] **CI-02**: Trigger workflow on git tag push (v*)
+- [ ] **CI-03**: Configure npm publish step
+- [ ] **CI-04**: Document NPM_TOKEN secret setup in README
+
+---
+
+## v4.0 Requirements (Complete — Web Migration)
+
+Requirements for web migration. All completed.
 
 ### Core Rendering
 
@@ -111,11 +156,41 @@ Which phases cover which requirements. Updated during roadmap creation.
 | DOC-02 | Phase 3 | Complete |
 | DOC-03 | Phase 3 | Complete |
 
-**Coverage:**
-- v1 requirements: 23 total
-- Mapped to phases: 23
-- Unmapped: 0
+**v4.0 Coverage:**
+- v4.0 requirements: 23 total
+- Completed: 23 ✓
+
+---
+
+## v1.0.0 Traceability
+
+| Requirement | Phase | Status |
+|-------------|-------|--------|
+| REN-01 | Phase 1 | Pending |
+| REN-02 | Phase 1 | Pending |
+| REN-03 | Phase 1 | Pending |
+| CLN-01 | Phase 1 | Pending |
+| CLN-02 | Phase 1 | Pending |
+| CLN-03 | Phase 1 | Pending |
+| BLD-01 | Phase 1 | Pending |
+| BLD-02 | Phase 1 | Pending |
+| BLD-03 | Phase 1 | Pending |
+| GIT-01 | Phase 2 | Pending |
+| GIT-02 | Phase 2 | Pending |
+| DOC-04 | Phase 2 | Pending |
+| DOC-05 | Phase 2 | Pending |
+| DOC-06 | Phase 2 | Pending |
+| DOC-07 | Phase 2 | Pending |
+| CI-01 | Phase 2 | Pending |
+| CI-02 | Phase 2 | Pending |
+| CI-03 | Phase 2 | Pending |
+| CI-04 | Phase 2 | Pending |
+
+**v1.0.0 Coverage:**
+- v1.0.0 requirements: 19 total
+- Mapped to phases: 19
+- Unmapped: 0 ✓
 
 ---
 *Requirements defined: 2026-01-17*
-*Last updated: 2026-01-19 - v4.0 complete (23/23)*
+*Last updated: 2026-01-19 - v1.0.0 requirements added (19 total)*
