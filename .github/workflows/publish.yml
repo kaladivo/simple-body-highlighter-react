@@ -34,5 +34,13 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Debug npm config
+        run: |
+          echo "=== npm config ==="
+          npm config list
+          echo "=== .npmrc ==="
+          cat ~/.npmrc || echo "no ~/.npmrc"
+          cat .npmrc || echo "no ./.npmrc"
+
       - name: Publish to npm
         run: npm publish --access public --provenance
