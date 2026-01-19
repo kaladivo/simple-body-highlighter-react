@@ -4,6 +4,8 @@
 
 > SVG body part highlighter for React web applications.
 
+Based on [react-native-body-highlighter](https://github.com/HichamELBSI/react-native-body-highlighter) by [@HichamELBSI](https://github.com/HichamELBSI). This is a web-only version for React DOM.
+
 <div style="text-align:center;width:100%;">
   <img src="./docs/screenshots/example-female-front.PNG" width="150" alt="body-highlighter" />
   <img src="./docs/screenshots/example-female-back.PNG" width="150" alt="body-highlighter" />
@@ -100,29 +102,3 @@ import type { BodyPartSlug, BodyPartData, ModelProps } from 'simple-body-highlig
 ## Accessibility
 
 Body parts have ARIA labels and keyboard navigation (Tab + Enter/Space).
-
-## v4.0.0 Breaking Changes
-
-This is a web-only rewrite of the original `react-native-body-highlighter`. For React Native, use v3.x.
-
-Key changes:
-- Package renamed from `react-native-body-highlighter` to `simple-body-highlighter-react`
-- `onClick` replaces `onBodyPartPress`
-- `data` items require `{ slug, color }` (no more `intensity` or `side` properties)
-- Bilateral muscles now use `left-`/`right-` prefixes in the slug
-
-## Publishing (Maintainers)
-
-Releases are automated via GitHub Actions with [provenance attestation](https://docs.npmjs.com/generating-provenance-statements) using OIDC (no secrets needed).
-
-### Release workflow
-
-```bash
-# Update version (creates commit and tag)
-npm version patch  # or minor/major
-
-# Push commit and tag to trigger publish
-git push && git push --tags
-```
-
-The workflow runs tests, type-checks, builds, then publishes to npm.
