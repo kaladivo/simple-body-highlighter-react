@@ -13,18 +13,18 @@ See: .planning/PROJECT.md (updated 2026-01-19)
 ## Current Position
 
 **Milestone:** v1.0.0 Publish to npm
-**Phase:** 1 - Package Identity and Build Verification
+**Phase:** 2 - Remote, Documentation, and CI/CD
 **Plan:** 01 complete
-**Status:** Phase 1 complete
+**Status:** In progress
 
 **Progress:**
 ```
 Phase 1: [##########] 100% (9/9 requirements)
-Phase 2: [          ] 0% (0/10 requirements)
-v1.0.0:  [####      ] 47% (9/19 requirements)
+Phase 2: [##        ] 20% (2/10 requirements)
+v1.0.0:  [#####     ] 58% (11/19 requirements)
 ```
 
-**Next Action:** `/gsd:plan-phase 2` to plan Remote, Documentation, and CI/CD
+**Next Action:** Execute 02-02-PLAN.md (GitHub remote setup)
 
 ---
 
@@ -32,9 +32,9 @@ v1.0.0:  [####      ] 47% (9/19 requirements)
 
 | Metric | Value |
 |--------|-------|
-| Session count | 1 |
-| Plans completed | 1 |
-| Requirements done | 9/19 |
+| Session count | 2 |
+| Plans completed | 2 |
+| Requirements done | 11/19 |
 | Phases complete | 1/2 |
 | Milestone | v1.0.0 in progress |
 
@@ -47,8 +47,8 @@ v1.0.0:  [####      ] 47% (9/19 requirements)
 Goal: Rename to simple-body-highlighter-react, clean react-native remnants, publish via GitHub Actions.
 
 Phases:
-1. Package Identity and Build Verification (9 requirements)
-2. Remote, Documentation, and CI/CD (10 requirements)
+1. Package Identity and Build Verification (9 requirements) - COMPLETE
+2. Remote, Documentation, and CI/CD (10 requirements) - IN PROGRESS
 
 Prior milestone: v4.0 Web Migration (shipped 2026-01-19)
 
@@ -75,7 +75,9 @@ Prior milestone: v4.0 Web Migration (shipped 2026-01-19)
 | simple-body-highlighter-react | Clearer package name for npm discovery | Done |
 | Version reset to 1.0.0 | Fresh identity for new package | Done |
 | GitHub links to kaladivo/simple-body-highlighter-react | Phase 2 will create this repo | Pending |
-| GitHub Actions publish on tags | Automated, no manual npm publish needed | Pending |
+| GitHub Actions publish on tags | Automated, no manual npm publish needed | Workflow ready |
+| Granular tokens over OIDC | Node 20 compatibility | Done |
+| npm over yarn in CI | Consistency with package-lock.json | Done |
 
 ### Technical Notes
 
@@ -85,6 +87,7 @@ Prior milestone: v4.0 Web Migration (shipped 2026-01-19)
 - Tests: 24 passing (jest + @testing-library/react) - verified
 - Body parts: 44 slugs (19 bilateral pairs, 4 centerline, 2 back-only)
 - React Native artifacts: all removed (rn-cli.config.js deleted)
+- CI/CD: GitHub Actions v6 workflow ready (publish.yml)
 
 ### Deferred to v1.1+
 
@@ -99,15 +102,15 @@ Prior milestone: v4.0 Web Migration (shipped 2026-01-19)
 ## Session Continuity
 
 **Last session:** 2026-01-19
-**Stopped at:** Completed 01-01-PLAN.md (Package Identity and Build Verification)
+**Stopped at:** Completed 02-01-PLAN.md (CI/CD Workflow and Documentation)
 **Resume file:** None
 
 **Context for next session:**
-- Phase 1 complete: package renamed, build verified, tests passing
-- Phase 2: Remote, Documentation, and CI/CD
-- Need to create GitHub repo kaladivo/simple-body-highlighter-react
-- Ready for `/gsd:plan-phase 2`
+- Phase 2 Plan 1 complete: workflow updated, README documented
+- Next: 02-02 to create GitHub remote and push
+- NPM_TOKEN secret needs to be added to repo after creation
+- Ready for `/gsd:execute-phase 02-02`
 
 ---
 *State initialized: 2026-01-17*
-*Last updated: 2026-01-19 - Phase 1 Plan 01 complete*
+*Last updated: 2026-01-19 - Phase 2 Plan 01 complete*
